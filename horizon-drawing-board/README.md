@@ -14,6 +14,18 @@ horizon-drawing-board/
     └── ShaderFX.snippets.xaml  optional paste-in blocks for Noesis shader brushes/effects
 ```
 
+## Previews
+
+These are **mockups, not Horizon screenshots**. The 2D views come from an HTML/SVG replica of
+`DrawingBoard.xaml` (same layout, icons, theme values, brushes and layers). It is filled with ink,
+physics and particles produced by running the real `DrawingBoardUI.ts` logic headless. The 3D
+views are three.js concept renders of the world-board features. Fonts and blur strength will
+differ slightly in Noesis.
+
+![All 13 themes](previews/00-overview-all-themes.png)
+![Physics and features](previews/00-overview-features-physics.png)
+![3D board concept renders](previews/00-overview-3d-board.png)
+
 ## Features
 
 **13 themes.** Each one restyles every panel, button, shadow, gradient, grid and palette. A theme
@@ -136,6 +148,7 @@ Studio that your Horizon build includes them.
 | worldBoard | – | the 3D board entity (enables the world features) |
 | canvasWidth / canvasHeight | 1600 / 900 | fallback canvas size |
 | floorInset | 150 | the physics floor sits this far above the bottom (above the dock) |
+| wallInsetLeft / wallInsetRight | 175 / 295 | physics walls sit inside the side panels so ink never hides behind them |
 | startTheme | 2 | index into the theme list (2 = Frosted Aurora) |
 | reassignLists | false | fallback if per-item updates don't refresh (see below) |
 

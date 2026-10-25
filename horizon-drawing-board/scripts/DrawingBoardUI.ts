@@ -115,13 +115,13 @@ const THEMES: Theme[] = [
     pal: ['#F8F8F2', '#7AA2FF', '#FF79C6', '#50FA7B', '#FFB86C', '#FF5555', '#BD93F9', '#8BE9FD', '#F1FA8C', '#6272A4', '#44475A', '#000000'],
   },
   {
-    name: 'Frosted Aurora', style: 'Glassmorphism', ...glass(0.55),
+    name: 'Frosted Aurora', style: 'Glassmorphism', ...glass(0.3),
     bgA: '#1A1446', bgB: '#3B1D6E', bgC: '#0E5A7A',
     blobA: '#FF5FD2', blobB: '#5F9BFF', blobC: '#3CFFD0', blobOp: 0.9, blur: 90,
     canvas: '#14FFFFFF', gridC: '#22FFFFFF', gridOp: 0.6, floorC: '#99FFFFFF',
-    panelA: '#38FFFFFF', panelB: '#10FFFFFF', panelSolid: '#30FFFFFF', edgeA: '#B3FFFFFF', edgeB: '#1AFFFFFF',
+    panelA: '#24FFFFFF', panelB: '#66140A3C', panelSolid: '#4D140A3C', edgeA: '#B3FFFFFF', edgeB: '#1AFFFFFF',
     shadowDark: '#0A0520', shadowLight: '#FFFFFF', shadowDarkOp: 0.35, shadowLightOp: 0, shadowBlur: 30, shadowDepth: 10,
-    btnA: '#2EFFFFFF', btnB: '#0DFFFFFF', chip: '#1FFFFFFF', chipOn: '#CCFFFFFF', chipOnText: '#2A1A5E',
+    btnA: '#2EFFFFFF', btnB: '#33140A3C', chip: '#1FFFFFFF', chipOn: '#CCFFFFFF', chipOnText: '#2A1A5E',
     text: '#FFFFFF', subtext: '#CCFFFFFF', accent: '#7CF7FF', accent2: '#FF8AF0', accent3: '#B6FF7C', glow: '#7CF7FF',
     vignette: '#0A0520', vignetteOp: 0.4, scanOp: 0.15,
     pal: ['#FFFFFF', '#7CF7FF', '#FF8AF0', '#B6FF7C', '#FFD27C', '#FF7C9C', '#A88CFF', '#5F9BFF', '#3CFFD0', '#FFF67C', '#C0C0D8', '#1A1446'],
@@ -151,13 +151,13 @@ const THEMES: Theme[] = [
     pal: ['#FFFFFF', '#00F0FF', '#FF00E5', '#F9F871', '#39FF14', '#FF3131', '#BC13FE', '#FF8F00', '#00FFA3', '#FF6EC7', '#5A5A7A', '#05010F'],
   },
   {
-    name: 'Vaporwave', style: 'Retro Gradient', ...glass(0.35),
+    name: 'Vaporwave', style: 'Retro Gradient', ...glass(0.25),
     bgA: '#2D0B59', bgB: '#B6339E', bgC: '#FF9A8B',
     blobA: '#FF6AD5', blobB: '#C774E8', blobC: '#94D0FF', blobOp: 0.6, blur: 80,
     canvas: '#D91B0F3A', gridC: '#66FF6AD5', gridOp: 0.9, floorC: '#FF6AD5',
-    panelA: '#59FF6AD5', panelB: '#3394D0FF', panelSolid: '#59C774E8', edgeA: '#FFFFFFFF', edgeB: '#80FF6AD5',
+    panelA: '#8C3A1170', panelB: '#73B6339E', panelSolid: '#8C3A1170', edgeA: '#FFFFFFFF', edgeB: '#80FF6AD5',
     shadowDark: '#2D0B59', shadowLight: '#FFFFFF', shadowDarkOp: 0.45, shadowLightOp: 0, shadowBlur: 24, shadowDepth: 8,
-    btnA: '#4DFF6AD5', btnB: '#2694D0FF', chip: '#33FFFFFF', chipOn: '#FFF27A', chipOnText: '#2D0B59',
+    btnA: '#40FF6AD5', btnB: '#592D0B59', chip: '#33FFFFFF', chipOn: '#FFF27A', chipOnText: '#2D0B59',
     text: '#FFF3FD', subtext: '#F3C6EC', accent: '#FF6AD5', accent2: '#94D0FF', accent3: '#FFF27A', glow: '#FF6AD5',
     vignette: '#2D0B59', vignetteOp: 0.45, scanOp: 0.3,
     pal: ['#FFFFFF', '#FF6AD5', '#C774E8', '#AD8CFF', '#8795E8', '#94D0FF', '#FFF27A', '#FF9A8B', '#7CFFCB', '#FF71CE', '#01CDFE', '#2D0B59'],
@@ -279,6 +279,8 @@ class DrawingBoardUI extends hz.Component<typeof DrawingBoardUI> {
     canvasWidth: { type: hz.PropTypes.Number, default: 1600 }, // used until SizeChanged reports the real size
     canvasHeight: { type: hz.PropTypes.Number, default: 900 },
     floorInset: { type: hz.PropTypes.Number, default: 150 }, // physics floor sits above the bottom dock
+    wallInsetLeft: { type: hz.PropTypes.Number, default: 175 }, // physics walls sit inside the side panels
+    wallInsetRight: { type: hz.PropTypes.Number, default: 295 },
     startTheme: { type: hz.PropTypes.Number, default: 2 },
     // If item-level field changes in collections don't refresh on your Horizon build, set to true:
     // the segment list is then re-assigned (throttled) instead of relying on per-item updates.
@@ -418,7 +420,8 @@ class DrawingBoardUI extends hz.Component<typeof DrawingBoardUI> {
         vigOp: t.vignetteOp,
         crtOp: 0,
         floorY: this.H - this.props.floorInset,
-        floorW: this.W,
+        floorX: this.props.wallInsetLeft,
+        floorW: this.W - this.props.wallInsetLeft - this.props.wallInsetRight,
         toast: '',
         toastFlip: false,
         themeFlip: false,
@@ -522,7 +525,7 @@ class DrawingBoardUI extends hz.Component<typeof DrawingBoardUI> {
       this.W = w;
       this.H = h;
       this.ctx.ui.floorY = this.H - this.props.floorInset;
-      this.ctx.ui.floorW = this.W;
+      this.ctx.ui.floorW = this.W - this.props.wallInsetLeft - this.props.wallInsetRight;
       this.updateGuides();
     }
   }
@@ -563,7 +566,7 @@ class DrawingBoardUI extends hz.Component<typeof DrawingBoardUI> {
     this.ctx.cursor.c = c;
     this.ctx.prev.c = c;
     this.pushBrush();
-    this.burst(this.W - 140, 220, c, 10);
+    if (this.ctx.cursor.v === SHOW) this.burst(this.mouse.x, this.mouse.y, c, 10);
   }
 
   private setTheme(i: number) {
@@ -1175,7 +1178,8 @@ class DrawingBoardUI extends hz.Component<typeof DrawingBoardUI> {
 
   private stepPhysics(dt: number) {
     const floor = this.H - this.props.floorInset;
-    const W = this.W;
+    const L = this.props.wallInsetLeft;
+    const R = this.W - this.props.wallInsetRight;
     const list = this.bodies;
 
     // grabbed body follows the cursor like a spring
@@ -1231,8 +1235,8 @@ class DrawingBoardUI extends hz.Component<typeof DrawingBoardUI> {
         const rx = b.px[k] * c - b.py[k] * s, ry = b.px[k] * s + b.py[k] * c;
         const x = b.cx + rx, y = b.cy + ry, pad = b.pad[k];
         if (y + pad > floor) { penFloor = Math.max(penFloor, y + pad - floor); this.contact(b, rx, ry, 0, -1); }
-        if (x - pad < 0) { penL = Math.max(penL, pad - x); this.contact(b, rx, ry, 1, 0); }
-        if (x + pad > W) { penR = Math.max(penR, x + pad - W); this.contact(b, rx, ry, -1, 0); }
+        if (x - pad < L) { penL = Math.max(penL, L + pad - x); this.contact(b, rx, ry, 1, 0); }
+        if (x + pad > R) { penR = Math.max(penR, x + pad - R); this.contact(b, rx, ry, -1, 0); }
         if (y - pad < 0) { penTop = Math.max(penTop, pad - y); this.contact(b, rx, ry, 0, 1); }
       }
       b.cy -= penFloor; b.cy += penTop; b.cx += penL; b.cx -= penR;

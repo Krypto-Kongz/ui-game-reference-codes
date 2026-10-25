@@ -716,7 +716,7 @@
 
       <!-- physics floor -->
       <Canvas IsHitTestVisible="False">
-        <Rectangle x:Name="FloorGlow" Canvas.Top="{Binding ui.floorY}" Width="{Binding ui.floorW}" Height="3" Margin="0,-1,0,0">
+        <Rectangle x:Name="FloorGlow" Canvas.Left="{Binding ui.floorX}" Canvas.Top="{Binding ui.floorY}" Width="{Binding ui.floorW}" Height="3" Margin="0,-1,0,0">
           <Rectangle.Fill>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
               <GradientStop Color="#00FFFFFF" Offset="0"/>
