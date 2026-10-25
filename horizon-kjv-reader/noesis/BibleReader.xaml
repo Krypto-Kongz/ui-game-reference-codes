@@ -1,0 +1,940 @@
+<!--
+  BibleReader.xaml  -  King James Bible panel for BibleReaderUI.ts (Meta Horizon Worlds, Noesis)
+
+  Bindings:  theme.*  colors and effect strengths    ui.*  labels, toggles, flips
+             booksOT / booksNT / chapters / verses / results / marks / quick  lists
+             commands: openBook, openChapter, selectVerse, readVerse, readChapter, doSearch, ...
+  Themes: Parchment, Stained Glass, Night, Neon Glass. Only core Noesis features are used.
+-->
+<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Name="Page">
+
+  <UserControl.Resources>
+
+    <!-- ~~~~ Panels ~~~~ -->
+    <Style x:Key="Panel" TargetType="ContentControl">
+      <Setter Property="Padding" Value="14"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ContentControl">
+            <Grid>
+              <Border CornerRadius="24" Background="{Binding theme.panelSolid}">
+                <Border.Effect>
+                  <DropShadowEffect Color="{Binding theme.shadowColor}" Opacity="{Binding theme.shadowOp}"
+                                    BlurRadius="{Binding theme.shadowBlur}" ShadowDepth="{Binding theme.shadowDepth}" Direction="290"/>
+                </Border.Effect>
+              </Border>
+              <Border CornerRadius="24" BorderThickness="1.5">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{Binding theme.panelA}" Offset="0"/>
+                    <GradientStop Color="{Binding theme.panelB}" Offset="1"/>
+                  </LinearGradientBrush>
+                </Border.Background>
+                <Border.BorderBrush>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="{Binding theme.edgeA}" Offset="0"/>
+                    <GradientStop Color="{Binding theme.edgeB}" Offset="1"/>
+                  </LinearGradientBrush>
+                </Border.BorderBrush>
+              </Border>
+              <Border CornerRadius="23" Margin="1.5" Opacity="{Binding theme.sheenOp}" IsHitTestVisible="False">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0.3,1">
+                    <GradientStop Color="#B3FFFFFF" Offset="0"/>
+                    <GradientStop Color="#14FFFFFF" Offset="0.4"/>
+                    <GradientStop Color="#00FFFFFF" Offset="0.6"/>
+                  </LinearGradientBrush>
+                </Border.Background>
+              </Border>
+              <ContentPresenter Margin="{TemplateBinding Padding}"/>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="Header" TargetType="TextBlock">
+      <Setter Property="Foreground" Value="{Binding theme.subtext}"/>
+      <Setter Property="FontSize" Value="11.5"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Margin" Value="2,6,0,6"/>
+    </Style>
+
+    <!-- ~~~~ Pill button. Tag = highlighted (bool) ~~~~ -->
+    <Style x:Key="Pill" TargetType="Button">
+      <Setter Property="Height" Value="34"/>
+      <Setter Property="Padding" Value="14,0"/>
+      <Setter Property="Margin" Value="3"/>
+      <Setter Property="FontSize" Value="13"/>
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Foreground" Value="{Binding theme.btnText}"/>
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid RenderTransformOrigin="0.5,0.5">
+              <Grid.RenderTransform><ScaleTransform x:Name="Scale"/></Grid.RenderTransform>
+              <Border x:Name="Face" CornerRadius="17" BorderThickness="1" BorderBrush="{Binding theme.btnEdge}">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="{Binding theme.btnA}" Offset="0"/>
+                    <GradientStop Color="{Binding theme.btnB}" Offset="1"/>
+                  </LinearGradientBrush>
+                </Border.Background>
+              </Border>
+              <Border x:Name="On" CornerRadius="17" Background="{Binding theme.chipOn}" Opacity="0">
+                <Border.Effect>
+                  <DropShadowEffect Color="{Binding theme.chipOn}" ShadowDepth="0" BlurRadius="14" Opacity="0.55"/>
+                </Border.Effect>
+              </Border>
+              <Border x:Name="Hover" CornerRadius="17" Background="{Binding theme.accent}" Opacity="0"/>
+              <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="Hover" Storyboard.TargetProperty="Opacity" To="0.16" Duration="0:0:0.15"/>
+                      <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleX" To="1.04" Duration="0:0:0.15"/>
+                      <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleY" To="1.04" Duration="0:0:0.15"/>
+                    </Storyboard>
+                  </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <DoubleAnimation Storyboard.TargetName="Hover" Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2"/>
+                      <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleX" To="1" Duration="0:0:0.2"/>
+                      <DoubleAnimation Storyboard.TargetName="Scale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2"/>
+                    </Storyboard>
+                  </BeginStoryboard>
+                </Trigger.ExitActions>
+              </Trigger>
+              <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="Scale" Property="ScaleX" Value="0.94"/>
+                <Setter TargetName="Scale" Property="ScaleY" Value="0.94"/>
+              </Trigger>
+              <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                <Setter TargetName="On" Property="Opacity" Value="1"/>
+                <Setter Property="Foreground" Value="{Binding theme.chipOnText}"/>
+              </DataTrigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="Round" TargetType="Button" BasedOn="{StaticResource Pill}">
+      <Setter Property="Width" Value="38"/>
+      <Setter Property="Height" Value="38"/>
+      <Setter Property="Padding" Value="0"/>
+    </Style>
+
+    <Style x:Key="Icon" TargetType="Path">
+      <Setter Property="Width" Value="20"/>
+      <Setter Property="Height" Value="20"/>
+      <Setter Property="Stretch" Value="Uniform"/>
+      <Setter Property="StrokeThickness" Value="2"/>
+      <Setter Property="StrokeStartLineCap" Value="Round"/>
+      <Setter Property="StrokeEndLineCap" Value="Round"/>
+      <Setter Property="StrokeLineJoin" Value="Round"/>
+      <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"/>
+    </Style>
+
+    <!-- Book / chapter tiles. Tag = selected. -->
+    <Style x:Key="Tile" TargetType="Button">
+      <Setter Property="Margin" Value="2"/>
+      <Setter Property="Height" Value="30"/>
+      <Setter Property="FontSize" Value="12.5"/>
+      <Setter Property="Foreground" Value="{Binding DataContext.theme.btnText, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="HorizontalContentAlignment" Value="Left"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid>
+              <Border x:Name="Bg" CornerRadius="9" Background="{Binding DataContext.theme.btnB, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Opacity="0.85"/>
+              <Border x:Name="Sel" CornerRadius="9" Background="{Binding DataContext.theme.chipOn, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Opacity="0">
+                <Border.Effect>
+                  <DropShadowEffect Color="{Binding DataContext.theme.chipOn, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" ShadowDepth="0" BlurRadius="10" Opacity="0.6"/>
+                </Border.Effect>
+              </Border>
+              <Border x:Name="Hover" CornerRadius="9" Background="{Binding DataContext.theme.accent, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Opacity="0"/>
+              <ContentPresenter Margin="10,0" VerticalAlignment="Center" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Hover" Property="Opacity" Value="0.18"/>
+              </Trigger>
+              <DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                <Setter TargetName="Sel" Property="Opacity" Value="1"/>
+                <Setter Property="Foreground" Value="{Binding DataContext.theme.chipOnText, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+              </DataTrigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- A verse: tap to select. sel / play drive the highlight. -->
+    <Style x:Key="VerseItem" TargetType="Button">
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid Margin="0,1">
+              <Border x:Name="Bg" CornerRadius="10" Background="Transparent"/>
+              <Border x:Name="Hover" CornerRadius="10" Opacity="0"
+                      Background="{Binding DataContext.theme.selBg, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+              <Rectangle x:Name="Bar" Width="4" RadiusX="2" RadiusY="2" HorizontalAlignment="Left" Margin="2,6,0,6" Opacity="0"
+                         Fill="{Binding DataContext.theme.playBar, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+              <Grid Margin="10,5,12,5">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="44"/>
+                  <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding n}" FontWeight="Bold" HorizontalAlignment="Right" Margin="0,3,12,0"
+                           FontSize="{Binding DataContext.ui.numSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                           Foreground="{Binding DataContext.theme.verseNum, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                <StackPanel Grid.Column="1">
+                  <TextBlock Text="{Binding head}" Visibility="{Binding headVis}" FontStyle="Italic" TextWrapping="Wrap" Margin="0,0,0,4"
+                             FontSize="{Binding DataContext.ui.numSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                             Foreground="{Binding DataContext.theme.heading, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                  <TextBlock Text="{Binding t}" TextWrapping="Wrap"
+                             FontSize="{Binding DataContext.ui.fontSize, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                             LineHeight="{Binding DataContext.ui.lineHeight, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                </StackPanel>
+              </Grid>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Hover" Property="Opacity" Value="0.55"/>
+              </Trigger>
+              <DataTrigger Binding="{Binding sel}" Value="True">
+                <Setter TargetName="Bg" Property="Background" Value="{Binding DataContext.theme.selBg, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+              </DataTrigger>
+              <DataTrigger Binding="{Binding play}" Value="True">
+                <Setter TargetName="Bg" Property="Background" Value="{Binding DataContext.theme.playBg, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                <DataTrigger.EnterActions>
+                  <BeginStoryboard x:Name="PlayPulse">
+                    <Storyboard RepeatBehavior="Forever">
+                      <DoubleAnimation Storyboard.TargetName="Bar" Storyboard.TargetProperty="Opacity" From="0.45" To="1" Duration="0:0:0.6" AutoReverse="True"/>
+                    </Storyboard>
+                  </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                  <StopStoryboard BeginStoryboardName="PlayPulse"/>
+                </DataTrigger.ExitActions>
+              </DataTrigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- Search result / bookmark row -->
+    <Style x:Key="RefRow" TargetType="Button">
+      <Setter Property="Focusable" Value="False"/>
+      <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Button">
+            <Grid Margin="0,2">
+              <Border x:Name="Bg" CornerRadius="10" Opacity="0.6"
+                      Background="{Binding DataContext.theme.btnB, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+              <Border x:Name="Hover" CornerRadius="10" Opacity="0"
+                      Background="{Binding DataContext.theme.selBg, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+              <StackPanel Margin="12,7">
+                <TextBlock Text="{Binding ref}" FontWeight="Bold" FontSize="13"
+                           Foreground="{Binding DataContext.theme.accent, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                <TextBlock Text="{Binding t}" FontSize="12.5" TextWrapping="Wrap" MaxHeight="36" TextTrimming="WordEllipsis" Margin="0,2,0,0"
+                           Foreground="{Binding DataContext.theme.text, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+              </StackPanel>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Hover" Property="Opacity" Value="1"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="BareButton" TargetType="Button">
+      <Border Background="{TemplateBinding Background}"><ContentPresenter/></Border>
+    </ControlTemplate>
+
+    <!-- ~~~~ Storyboards ~~~~ -->
+    <Storyboard x:Key="Ambient">
+      <DoubleAnimation Storyboard.TargetName="BlobAT" Storyboard.TargetProperty="X" From="-140" To="200" Duration="0:0:16" AutoReverse="True" RepeatBehavior="Forever">
+        <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+      <DoubleAnimation Storyboard.TargetName="BlobBT" Storyboard.TargetProperty="Y" From="120" To="-160" Duration="0:0:19" AutoReverse="True" RepeatBehavior="Forever">
+        <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+      <DoubleAnimation Storyboard.TargetName="BlobCT" Storyboard.TargetProperty="X" From="220" To="-220" Duration="0:0:23" AutoReverse="True" RepeatBehavior="Forever">
+        <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+      <!-- light rays sweep (stained glass, parchment candlelight) -->
+      <DoubleAnimation Storyboard.TargetName="RaysT" Storyboard.TargetProperty="X" From="-260" To="260" Duration="0:0:18" AutoReverse="True" RepeatBehavior="Forever">
+        <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+      <!-- night stars twinkle in two groups -->
+      <DoubleAnimation Storyboard.TargetName="StarsA" Storyboard.TargetProperty="Opacity" From="0.25" To="1" Duration="0:0:2.6" AutoReverse="True" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="StarsB" Storyboard.TargetProperty="Opacity" From="1" To="0.2" Duration="0:0:3.4" AutoReverse="True" RepeatBehavior="Forever"/>
+      <!-- neon glass glint sweeping across the black glass -->
+      <DoubleAnimationUsingKeyFrames Storyboard.TargetName="GlintT" Storyboard.TargetProperty="X" RepeatBehavior="Forever">
+        <LinearDoubleKeyFrame KeyTime="0:0:0" Value="-2000"/>
+        <EasingDoubleKeyFrame KeyTime="0:0:2.6" Value="2000">
+          <EasingDoubleKeyFrame.EasingFunction><SineEase EasingMode="EaseInOut"/></EasingDoubleKeyFrame.EasingFunction>
+        </EasingDoubleKeyFrame>
+        <LinearDoubleKeyFrame KeyTime="0:0:9" Value="2000"/>
+      </DoubleAnimationUsingKeyFrames>
+      <!-- scripture text: slow colour shimmer + gentle glow pulse (glow is only visible in Neon Glass) -->
+      <DoubleAnimation Storyboard.TargetName="VerseShift" Storyboard.TargetProperty="X" From="0" To="1200" Duration="0:0:16" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="VerseGlow" Storyboard.TargetProperty="Opacity" From="0.42" To="0.78" Duration="0:0:3.2" AutoReverse="True" RepeatBehavior="Forever">
+        <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+      <DoubleAnimation Storyboard.TargetName="TitleGlow" Storyboard.TargetProperty="Opacity" From="0.5" To="0.95" Duration="0:0:2.4" AutoReverse="True" RepeatBehavior="Forever">
+        <DoubleAnimation.EasingFunction><SineEase EasingMode="EaseInOut"/></DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+      <DoubleAnimation Storyboard.TargetName="LogoGlow" Storyboard.TargetProperty="Opacity" From="0.4" To="0.9" Duration="0:0:2.8" AutoReverse="True" RepeatBehavior="Forever"/>
+      <!-- reader equalizer -->
+      <DoubleAnimation Storyboard.TargetName="Eq1" Storyboard.TargetProperty="ScaleY" From="0.25" To="1" Duration="0:0:0.42" AutoReverse="True" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Eq2" Storyboard.TargetProperty="ScaleY" From="0.9" To="0.3" Duration="0:0:0.55" AutoReverse="True" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Eq3" Storyboard.TargetProperty="ScaleY" From="0.35" To="1" Duration="0:0:0.37" AutoReverse="True" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Eq4" Storyboard.TargetProperty="ScaleY" From="1" To="0.2" Duration="0:0:0.6" AutoReverse="True" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="Eq5" Storyboard.TargetProperty="ScaleY" From="0.3" To="0.85" Duration="0:0:0.48" AutoReverse="True" RepeatBehavior="Forever"/>
+      <DoubleAnimation Storyboard.TargetName="AiDot" Storyboard.TargetProperty="Opacity" From="0.45" To="1" Duration="0:0:1.4" AutoReverse="True" RepeatBehavior="Forever"/>
+    </Storyboard>
+
+    <Storyboard x:Key="Intro">
+      <DoubleAnimation Storyboard.TargetName="Layout" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.7"/>
+      <DoubleAnimation Storyboard.TargetName="LayoutT" Storyboard.TargetProperty="Y" From="24" To="0" Duration="0:0:0.8">
+        <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+      </DoubleAnimation>
+    </Storyboard>
+  </UserControl.Resources>
+
+  <UserControl.Triggers>
+    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+      <BeginStoryboard Storyboard="{StaticResource Ambient}"/>
+      <BeginStoryboard Storyboard="{StaticResource Intro}"/>
+    </EventTrigger>
+  </UserControl.Triggers>
+
+  <Grid ClipToBounds="True">
+
+    <!-- ~~~~ 1. Backdrop ~~~~ -->
+    <Rectangle IsHitTestVisible="False">
+      <Rectangle.Fill>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+          <GradientStop Color="{Binding theme.bgA}" Offset="0"/>
+          <GradientStop Color="{Binding theme.bgB}" Offset="0.55"/>
+          <GradientStop Color="{Binding theme.bgC}" Offset="1"/>
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+    </Rectangle>
+
+    <Grid IsHitTestVisible="False" Opacity="{Binding theme.blobOp}">
+      <Ellipse Width="820" Height="820" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-220,-260,0,0">
+        <Ellipse.RenderTransform><TranslateTransform x:Name="BlobAT"/></Ellipse.RenderTransform>
+        <Ellipse.Fill><RadialGradientBrush><GradientStop Color="{Binding theme.blobA}" Offset="0"/><GradientStop Color="#00FFFFFF" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
+      </Ellipse>
+      <Ellipse Width="900" Height="900" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,-260,-300">
+        <Ellipse.RenderTransform><TranslateTransform x:Name="BlobBT"/></Ellipse.RenderTransform>
+        <Ellipse.Fill><RadialGradientBrush><GradientStop Color="{Binding theme.blobB}" Offset="0"/><GradientStop Color="#00FFFFFF" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
+      </Ellipse>
+      <Ellipse Width="700" Height="700" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Ellipse.RenderTransform><TranslateTransform x:Name="BlobCT"/></Ellipse.RenderTransform>
+        <Ellipse.Fill><RadialGradientBrush><GradientStop Color="{Binding theme.blobC}" Offset="0"/><GradientStop Color="#00FFFFFF" Offset="1"/></RadialGradientBrush></Ellipse.Fill>
+      </Ellipse>
+    </Grid>
+
+    <!-- stained glass: lead lattice -->
+    <Grid IsHitTestVisible="False" Opacity="{Binding theme.leadOp}">
+      <Rectangle>
+        <Rectangle.Fill>
+          <LinearGradientBrush MappingMode="Absolute" StartPoint="0,0" EndPoint="58,58" SpreadMethod="Repeat">
+            <GradientStop Color="#FF120A04" Offset="0"/><GradientStop Color="#FF120A04" Offset="0.07"/>
+            <GradientStop Color="#00120A04" Offset="0.07"/><GradientStop Color="#00120A04" Offset="1"/>
+          </LinearGradientBrush>
+        </Rectangle.Fill>
+      </Rectangle>
+      <Rectangle>
+        <Rectangle.Fill>
+          <LinearGradientBrush MappingMode="Absolute" StartPoint="0,58" EndPoint="58,0" SpreadMethod="Repeat">
+            <GradientStop Color="#FF120A04" Offset="0"/><GradientStop Color="#FF120A04" Offset="0.07"/>
+            <GradientStop Color="#00120A04" Offset="0.07"/><GradientStop Color="#00120A04" Offset="1"/>
+          </LinearGradientBrush>
+        </Rectangle.Fill>
+      </Rectangle>
+    </Grid>
+
+    <!-- light rays -->
+    <Grid IsHitTestVisible="False" Opacity="{Binding theme.raysOp}">
+      <Grid.RenderTransform><TranslateTransform x:Name="RaysT"/></Grid.RenderTransform>
+      <Rectangle Width="200" Height="1700" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-700,0,0,0" RenderTransformOrigin="0.5,0.5">
+        <Rectangle.RenderTransform><RotateTransform Angle="24"/></Rectangle.RenderTransform>
+        <Rectangle.Fill><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#00FFFFFF" Offset="0"/><GradientStop Color="{Binding theme.raysColor}" Offset="0.5"/><GradientStop Color="#00FFFFFF" Offset="1"/></LinearGradientBrush></Rectangle.Fill>
+      </Rectangle>
+      <Rectangle Width="120" Height="1700" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="-100,0,0,0" RenderTransformOrigin="0.5,0.5" Opacity="0.7">
+        <Rectangle.RenderTransform><RotateTransform Angle="24"/></Rectangle.RenderTransform>
+        <Rectangle.Fill><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#00FFFFFF" Offset="0"/><GradientStop Color="{Binding theme.raysColor}" Offset="0.5"/><GradientStop Color="#00FFFFFF" Offset="1"/></LinearGradientBrush></Rectangle.Fill>
+      </Rectangle>
+      <Rectangle Width="260" Height="1700" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="600,0,0,0" RenderTransformOrigin="0.5,0.5" Opacity="0.8">
+        <Rectangle.RenderTransform><RotateTransform Angle="24"/></Rectangle.RenderTransform>
+        <Rectangle.Fill><LinearGradientBrush StartPoint="0,0" EndPoint="1,0"><GradientStop Color="#00FFFFFF" Offset="0"/><GradientStop Color="{Binding theme.raysColor}" Offset="0.5"/><GradientStop Color="#00FFFFFF" Offset="1"/></LinearGradientBrush></Rectangle.Fill>
+      </Rectangle>
+    </Grid>
+
+    <!-- night sky -->
+    <Grid IsHitTestVisible="False" Opacity="{Binding theme.starsOp}">
+      <Canvas x:Name="StarsA">
+        <Ellipse Canvas.Left="120" Canvas.Top="96" Width="3" Height="3" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="340" Canvas.Top="40" Width="2" Height="2" Fill="#FFDDE6FF"/>
+        <Ellipse Canvas.Left="610" Canvas.Top="88" Width="3" Height="3" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="905" Canvas.Top="34" Width="2" Height="2" Fill="#FFFFF1D6"/>
+        <Ellipse Canvas.Left="1210" Canvas.Top="92" Width="3" Height="3" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="1470" Canvas.Top="52" Width="2" Height="2" Fill="#FFDDE6FF"/>
+        <Ellipse Canvas.Left="60" Canvas.Top="540" Width="2" Height="2" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="1560" Canvas.Top="470" Width="3" Height="3" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="1530" Canvas.Top="760" Width="2" Height="2" Fill="#FFFFF1D6"/>
+        <Ellipse Canvas.Left="250" Canvas.Top="868" Width="2" Height="2" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="760" Canvas.Top="884" Width="2" Height="2" Fill="#FFDDE6FF"/>
+        <Ellipse Canvas.Left="1180" Canvas.Top="878" Width="3" Height="3" Fill="#FFFFFFFF"/>
+      </Canvas>
+      <Canvas x:Name="StarsB">
+        <Ellipse Canvas.Left="210" Canvas.Top="58" Width="2" Height="2" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="480" Canvas.Top="20" Width="3" Height="3" Fill="#FFFFF1D6"/>
+        <Ellipse Canvas.Left="760" Canvas.Top="62" Width="2" Height="2" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="1050" Canvas.Top="76" Width="3" Height="3" Fill="#FFDDE6FF"/>
+        <Ellipse Canvas.Left="1340" Canvas.Top="24" Width="2" Height="2" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="24" Canvas.Top="300" Width="3" Height="3" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="1585" Canvas.Top="250" Width="2" Height="2" Fill="#FFFFF1D6"/>
+        <Ellipse Canvas.Left="30" Canvas.Top="780" Width="3" Height="3" Fill="#FFDDE6FF"/>
+        <Ellipse Canvas.Left="520" Canvas.Top="890" Width="2" Height="2" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="980" Canvas.Top="892" Width="2" Height="2" Fill="#FFFFFFFF"/>
+        <Ellipse Canvas.Left="1400" Canvas.Top="884" Width="3" Height="3" Fill="#FFFFF1D6"/>
+      </Canvas>
+    </Grid>
+
+    <!-- ~~~~ 2. Layout ~~~~ -->
+    <Grid x:Name="Layout">
+      <Grid.RenderTransform><TranslateTransform x:Name="LayoutT"/></Grid.RenderTransform>
+
+      <!-- ~~~~ Top bar ~~~~ -->
+      <ContentControl Style="{StaticResource Panel}" VerticalAlignment="Top" Height="70" Margin="16,16,16,0" Padding="16,0">
+        <Grid VerticalAlignment="Center">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+          </Grid.ColumnDefinitions>
+
+          <StackPanel Orientation="Horizontal">
+            <Grid Width="40" Height="40">
+              <Ellipse x:Name="LogoGlow" Margin="-8" Fill="{Binding theme.accent}">
+                <Ellipse.Effect><BlurEffect Radius="14"/></Ellipse.Effect>
+              </Ellipse>
+              <Border CornerRadius="10" BorderThickness="2" BorderBrush="{Binding theme.accent}" Background="{Binding theme.panelSolid}"/>
+              <Path Data="M20,9 L20,31 M13,16 L27,16" Stroke="{Binding theme.accent}" StrokeThickness="3" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+            </Grid>
+            <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
+              <TextBlock Text="HOLY BIBLE" FontSize="21" FontWeight="Black" Foreground="{Binding theme.text}">
+                <TextBlock.Effect>
+                  <DropShadowEffect x:Name="TitleGlow" Color="{Binding theme.titleGlow}" ShadowDepth="0" BlurRadius="14"/>
+                </TextBlock.Effect>
+              </TextBlock>
+              <TextBlock Text="King James Version  ·  Oxford 1769" FontSize="11" Foreground="{Binding theme.subtext}"/>
+            </StackPanel>
+          </StackPanel>
+
+          <!-- search / go to reference -->
+          <Grid Grid.Column="1" Margin="24,0" MaxWidth="460" HorizontalAlignment="Stretch" Height="40">
+            <Border CornerRadius="20" Background="{Binding theme.inputBg}" BorderBrush="{Binding theme.btnEdge}" BorderThickness="1"/>
+            <TextBlock Text="Search, or go to John 3:16" Margin="40,0,60,0" VerticalAlignment="Center" FontSize="13.5" Opacity="0.55"
+                       Foreground="{Binding theme.inputText}" IsHitTestVisible="False">
+              <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                  <Setter Property="Visibility" Value="Collapsed"/>
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                      <Setter Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </TextBlock.Style>
+            </TextBlock>
+            <Path Data="M9,3 A6,6 0 1 1 8.99,3 M13.5,13.5 L18,18" Stroke="{Binding theme.inputText}" StrokeThickness="2" Opacity="0.6"
+                  HorizontalAlignment="Left" Margin="14,0,0,0" VerticalAlignment="Center" Width="20" Height="20" Stretch="Uniform"/>
+            <TextBox x:Name="SearchBox" Margin="38,0,58,0" VerticalAlignment="Center" FontSize="14" Background="Transparent" BorderThickness="0"
+                     Foreground="{Binding theme.inputText}" CaretBrush="{Binding theme.accent}"/>
+            <Button Style="{StaticResource Pill}" HorizontalAlignment="Right" Margin="3" Height="32" Content="Go"
+                    Command="{Binding doSearch}" CommandParameter="{Binding Text, ElementName=SearchBox}" Tag="True"/>
+          </Grid>
+
+          <!-- themes -->
+          <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+            <Button Style="{StaticResource Pill}" Content="Parchment" Command="{Binding setTheme}" CommandParameter="0" Tag="{Binding ui.th0}"/>
+            <Button Style="{StaticResource Pill}" Content="Stained Glass" Command="{Binding setTheme}" CommandParameter="1" Tag="{Binding ui.th1}"/>
+            <Button Style="{StaticResource Pill}" Content="Night" Command="{Binding setTheme}" CommandParameter="2" Tag="{Binding ui.th2}"/>
+            <Button Style="{StaticResource Pill}" Content="Neon Glass" Command="{Binding setTheme}" CommandParameter="3" Tag="{Binding ui.th3}"/>
+          </StackPanel>
+
+          <!-- text size -->
+          <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Margin="14,0">
+            <Button Style="{StaticResource Round}" Command="{Binding fontDown}">
+              <TextBlock Text="A" FontSize="12" FontWeight="Bold"/>
+            </Button>
+            <TextBlock Text="{Binding ui.fontLabel}" VerticalAlignment="Center" Margin="6,0" FontSize="12" Foreground="{Binding theme.subtext}"/>
+            <Button Style="{StaticResource Round}" Command="{Binding fontUp}">
+              <TextBlock Text="A" FontSize="19" FontWeight="Bold"/>
+            </Button>
+          </StackPanel>
+
+          <!-- AI status -->
+          <Border Grid.Column="4" CornerRadius="17" Height="34" Padding="12,0" Background="{Binding theme.chip}" BorderBrush="{Binding theme.btnEdge}" BorderThickness="1">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+              <Ellipse x:Name="AiDot" Width="9" Height="9" Margin="0,0,8,0">
+                <Ellipse.Style>
+                  <Style TargetType="Ellipse">
+                    <Setter Property="Fill" Value="#FFF5A524"/>
+                    <Style.Triggers>
+                      <DataTrigger Binding="{Binding ui.aiOn}" Value="True">
+                        <Setter Property="Fill" Value="#FF3DDC84"/>
+                      </DataTrigger>
+                    </Style.Triggers>
+                  </Style>
+                </Ellipse.Style>
+              </Ellipse>
+              <TextBlock Text="{Binding ui.aiNote}" FontSize="12" Foreground="{Binding theme.text}" MaxWidth="215" TextTrimming="CharacterEllipsis"/>
+            </StackPanel>
+          </Border>
+        </Grid>
+      </ContentControl>
+
+      <!-- ~~~~ Left: books ~~~~ -->
+      <ContentControl Style="{StaticResource Panel}" HorizontalAlignment="Left" Width="300" Margin="16,102,0,98" Padding="12">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+          <UniformGrid Columns="2">
+            <Button Style="{StaticResource Pill}" Content="Old Testament" Command="{Binding showOT}" Tag="{Binding ui.otOn}"/>
+            <Button Style="{StaticResource Pill}" Content="New Testament" Command="{Binding showNT}" Tag="{Binding ui.ntOn}"/>
+          </UniformGrid>
+          <ScrollViewer Grid.Row="1" Margin="0,8,0,0" VerticalScrollBarVisibility="Auto">
+            <Grid>
+              <ItemsControl ItemsSource="{Binding booksOT}" Visibility="{Binding ui.otVis}">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Button Style="{StaticResource Tile}" Content="{Binding name}" Tag="{Binding sel}"
+                            Command="{Binding DataContext.openBook, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding i}"/>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+              <ItemsControl ItemsSource="{Binding booksNT}" Visibility="{Binding ui.ntVis}">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Button Style="{StaticResource Tile}" Content="{Binding name}" Tag="{Binding sel}"
+                            Command="{Binding DataContext.openBook, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding i}"/>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </Grid>
+          </ScrollViewer>
+          <StackPanel Grid.Row="2">
+            <TextBlock Text="POPULAR PASSAGES" Style="{StaticResource Header}" Margin="2,10,0,4"/>
+            <ItemsControl ItemsSource="{Binding quick}">
+              <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Button Style="{StaticResource Pill}" Height="28" Padding="10,0" FontSize="11.5" Margin="2" Content="{Binding label}"
+                          Command="{Binding DataContext.quickGo, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding q}"/>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Grid>
+      </ContentControl>
+
+      <!-- ~~~~ Center: the page ~~~~ -->
+      <Grid Margin="332,102,432,98">
+        <Border CornerRadius="24" BorderThickness="1.5" BorderBrush="{Binding theme.pageBorder}">
+          <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0.4,1">
+              <GradientStop Color="{Binding theme.pageA}" Offset="0"/>
+              <GradientStop Color="{Binding theme.pageB}" Offset="1"/>
+            </LinearGradientBrush>
+          </Border.Background>
+          <Border.Effect>
+            <DropShadowEffect Color="{Binding theme.shadowColor}" Opacity="{Binding theme.shadowOp}" BlurRadius="30" ShadowDepth="{Binding theme.shadowDepth}" Direction="290"/>
+          </Border.Effect>
+        </Border>
+        <!-- aged / glowing page edge -->
+        <Border CornerRadius="24" Opacity="{Binding theme.pageEdgeOp}" IsHitTestVisible="False">
+          <Border.Background>
+            <RadialGradientBrush RadiusX="0.72" RadiusY="0.7">
+              <GradientStop Color="#00000000" Offset="0.62"/>
+              <GradientStop Color="{Binding theme.pageEdge}" Offset="1"/>
+            </RadialGradientBrush>
+          </Border.Background>
+        </Border>
+
+        <Grid Margin="30,22,30,18">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+
+          <Grid>
+            <StackPanel>
+              <TextBlock Text="{Binding ui.bookTitle}" FontSize="34" FontWeight="Bold" Foreground="{Binding theme.accent}">
+                <TextBlock.Effect>
+                  <DropShadowEffect Color="{Binding theme.titleGlow}" ShadowDepth="0" BlurRadius="16" Opacity="0.9"/>
+                </TextBlock.Effect>
+              </TextBlock>
+              <TextBlock Text="{Binding ui.chapterTitle}" FontSize="17" FontWeight="SemiBold" Foreground="{Binding theme.pageSub}" Margin="2,0,0,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+              <Button Style="{StaticResource Round}" Command="{Binding prevChapter}">
+                <Path Style="{StaticResource Icon}" Data="M15,5 L8,12 L15,19"/>
+              </Button>
+              <Button Style="{StaticResource Round}" Command="{Binding nextChapter}">
+                <Path Style="{StaticResource Icon}" Data="M9,5 L16,12 L9,19"/>
+              </Button>
+              <Button Style="{StaticResource Pill}" Command="{Binding readChapter}" Tag="True" Margin="10,3,0,3">
+                <StackPanel Orientation="Horizontal">
+                  <Path Data="M0,0 L10,6 L0,12 Z" Fill="{Binding theme.chipOnText}" Width="10" Height="12" Margin="0,0,8,0"/>
+                  <TextBlock Text="Read chapter"/>
+                </StackPanel>
+              </Button>
+            </StackPanel>
+          </Grid>
+
+          <Rectangle Grid.Row="1" Height="2" Margin="0,12,0,8" RadiusX="1" RadiusY="1">
+            <Rectangle.Fill>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="{Binding theme.accent}" Offset="0"/>
+                <GradientStop Color="{Binding theme.accent2}" Offset="0.5"/>
+                <GradientStop Color="#00FFFFFF" Offset="1"/>
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+
+          <!-- verses (one page at a time; scrolls only if a page overflows) -->
+          <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" RenderTransformOrigin="0.5,0.5">
+            <ScrollViewer.RenderTransform><TranslateTransform/></ScrollViewer.RenderTransform>
+            <ScrollViewer.Style>
+              <Style TargetType="ScrollViewer">
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding ui.pageFlip}" Value="True">
+                    <DataTrigger.EnterActions>
+                      <BeginStoryboard>
+                        <Storyboard>
+                          <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.35"/>
+                          <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" From="28" To="0" Duration="0:0:0.4">
+                            <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                          </DoubleAnimation>
+                        </Storyboard>
+                      </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                      <BeginStoryboard>
+                        <Storyboard>
+                          <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:0.35"/>
+                          <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" From="28" To="0" Duration="0:0:0.4">
+                            <DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction>
+                          </DoubleAnimation>
+                        </Storyboard>
+                      </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </ScrollViewer.Style>
+            <ItemsControl ItemsSource="{Binding verses}">
+              <ItemsControl.Foreground>
+                <!-- slow shimmer across the words (all three stops match except in Neon Glass) -->
+                <LinearGradientBrush MappingMode="Absolute" StartPoint="0,0" EndPoint="1200,160" SpreadMethod="Repeat">
+                  <LinearGradientBrush.Transform><TranslateTransform x:Name="VerseShift"/></LinearGradientBrush.Transform>
+                  <GradientStop Color="{Binding theme.verseA}" Offset="0"/>
+                  <GradientStop Color="{Binding theme.verseB}" Offset="0.33"/>
+                  <GradientStop Color="{Binding theme.verseC}" Offset="0.66"/>
+                  <GradientStop Color="{Binding theme.verseA}" Offset="1"/>
+                </LinearGradientBrush>
+              </ItemsControl.Foreground>
+              <ItemsControl.Effect>
+                <!-- neon glow (transparent in the other themes) -->
+                <DropShadowEffect x:Name="VerseGlow" Color="{Binding theme.glowColor}" BlurRadius="{Binding theme.glowRadius}" ShadowDepth="0"/>
+              </ItemsControl.Effect>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Button Style="{StaticResource VerseItem}" HorizontalContentAlignment="Stretch"
+                          Command="{Binding DataContext.selectVerse, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding n}"/>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </ScrollViewer>
+
+          <Grid Grid.Row="3" Margin="0,10,0,0">
+            <Button Style="{StaticResource Pill}" HorizontalAlignment="Left" Command="{Binding prevPage}" Visibility="{Binding ui.prevPageVis}">
+              <StackPanel Orientation="Horizontal"><Path Style="{StaticResource Icon}" Width="14" Height="14" Data="M15,5 L8,12 L15,19"/><TextBlock Text="Previous" Margin="6,0,0,0"/></StackPanel>
+            </Button>
+            <TextBlock Text="{Binding ui.pageLabel}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12.5" Foreground="{Binding theme.pageSub}"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+              <Button Style="{StaticResource Pill}" Command="{Binding readPage}" Content="Read this page"/>
+              <Button Style="{StaticResource Pill}" Command="{Binding nextPage}" Visibility="{Binding ui.nextPageVis}">
+                <StackPanel Orientation="Horizontal"><TextBlock Text="Next" Margin="0,0,6,0"/><Path Style="{StaticResource Icon}" Width="14" Height="14" Data="M9,5 L16,12 L9,19"/></StackPanel>
+              </Button>
+            </StackPanel>
+          </Grid>
+        </Grid>
+
+        <!-- search results over the page -->
+        <ContentControl Style="{StaticResource Panel}" Visibility="{Binding ui.searchVis}" Margin="18" Padding="16">
+          <Grid>
+            <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+            <TextBlock Text="{Binding ui.searchTitle}" FontSize="16" FontWeight="Bold" Foreground="{Binding theme.text}" VerticalAlignment="Center" Margin="2,0,60,0" TextTrimming="CharacterEllipsis"/>
+            <Button Style="{StaticResource Round}" HorizontalAlignment="Right" Command="{Binding closeSearch}">
+              <Path Style="{StaticResource Icon}" Width="14" Height="14" Data="M5,5 L19,19 M19,5 L5,19"/>
+            </Button>
+            <ScrollViewer Grid.Row="1" Margin="0,10,0,0" VerticalScrollBarVisibility="Auto">
+              <StackPanel>
+                <TextBlock Text="Try a shorter phrase, or a reference such as Psalm 23 or Rom 8:28." Visibility="{Binding ui.searchEmptyVis}"
+                           Foreground="{Binding theme.subtext}" Margin="4,8" TextWrapping="Wrap"/>
+                <ItemsControl ItemsSource="{Binding results}">
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                      <Button Style="{StaticResource RefRow}"
+                              Command="{Binding DataContext.openKey, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding key}"/>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </StackPanel>
+            </ScrollViewer>
+          </Grid>
+        </ContentControl>
+      </Grid>
+
+      <!-- ~~~~ Right: chapters, selected verse, verse of the day, bookmarks ~~~~ -->
+      <ContentControl Style="{StaticResource Panel}" HorizontalAlignment="Right" Width="400" Margin="0,102,16,98" Padding="14,10">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
+
+          <StackPanel>
+            <TextBlock Text="CHAPTERS" Style="{StaticResource Header}"/>
+            <ScrollViewer MaxHeight="150" VerticalScrollBarVisibility="Auto">
+              <ItemsControl ItemsSource="{Binding chapters}">
+                <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="9"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Button Style="{StaticResource Tile}" Height="32" HorizontalContentAlignment="Center" Content="{Binding n}" Tag="{Binding sel}"
+                            Command="{Binding DataContext.openChapter, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding n}"/>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </ScrollViewer>
+          </StackPanel>
+
+          <!-- selected verse card -->
+          <Border Grid.Row="1" Margin="0,10,0,0" CornerRadius="16" Padding="14,12" Visibility="{Binding ui.selVis}"
+                  Background="{Binding theme.selBg}" BorderBrush="{Binding theme.btnEdge}" BorderThickness="1">
+            <StackPanel>
+              <TextBlock Text="{Binding ui.selRef}" FontSize="15" FontWeight="Bold" Foreground="{Binding theme.accent}"/>
+              <TextBlock Text="{Binding ui.selText}" FontSize="13" Foreground="{Binding theme.text}" TextWrapping="Wrap" MaxHeight="58" TextTrimming="WordEllipsis" Margin="0,4,0,6"/>
+              <WrapPanel>
+                <Button Style="{StaticResource Pill}" Command="{Binding readVerse}" Tag="True" Height="30">
+                  <StackPanel Orientation="Horizontal"><Path Data="M0,0 L9,5.5 L0,11 Z" Fill="{Binding theme.chipOnText}" Width="9" Height="11" Margin="0,0,7,0"/><TextBlock Text="Read verse"/></StackPanel>
+                </Button>
+                <Button Style="{StaticResource Pill}" Command="{Binding readFromHere}" Content="Read from here" Height="30"/>
+                <Button Style="{StaticResource Pill}" Command="{Binding explain}" Content="Explain" Height="30" Tag="{Binding ui.aiOn}"/>
+                <Button Style="{StaticResource Pill}" Command="{Binding toggleBookmark}" Content="{Binding ui.selMarkLabel}" Height="30" Tag="{Binding ui.selMarked}"/>
+              </WrapPanel>
+            </StackPanel>
+          </Border>
+
+          <!-- verse of the day -->
+          <Button Grid.Row="2" Margin="0,10,0,0" Template="{StaticResource BareButton}" Background="Transparent" Command="{Binding openKey}" CommandParameter="{Binding ui.vodKey}">
+            <Border CornerRadius="16" Padding="14,10" BorderThickness="1" BorderBrush="{Binding theme.btnEdge}">
+              <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                  <GradientStop Color="{Binding theme.btnA}" Offset="0"/>
+                  <GradientStop Color="{Binding theme.btnB}" Offset="1"/>
+                </LinearGradientBrush>
+              </Border.Background>
+              <StackPanel>
+                <TextBlock Text="VERSE OF THE DAY" Style="{StaticResource Header}" Margin="0,0,0,4"/>
+                <TextBlock Text="{Binding ui.vodText}" FontSize="13.5" FontStyle="Italic" TextWrapping="Wrap" Foreground="{Binding theme.text}" MaxHeight="58" TextTrimming="WordEllipsis"/>
+                <TextBlock Text="{Binding ui.vodRef}" FontSize="12.5" FontWeight="Bold" Foreground="{Binding theme.accent}" Margin="0,4,0,0" HorizontalAlignment="Right"/>
+              </StackPanel>
+            </Border>
+          </Button>
+
+          <TextBlock Grid.Row="3" Text="BOOKMARKS" Style="{StaticResource Header}" Margin="2,12,0,4"/>
+          <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+              <TextBlock Text="Tap a verse, then Bookmark to keep it here." Visibility="{Binding ui.marksEmptyVis}" Foreground="{Binding theme.subtext}" FontSize="12.5" Margin="2,4" TextWrapping="Wrap"/>
+              <ItemsControl ItemsSource="{Binding marks}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Grid>
+                      <Button Style="{StaticResource RefRow}" Margin="0,0,40,0"
+                              Command="{Binding DataContext.openKey, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding key}"/>
+                      <Button Style="{StaticResource Round}" Width="32" Height="32" HorizontalAlignment="Right"
+                              Command="{Binding DataContext.removeMark, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" CommandParameter="{Binding key}">
+                        <Path Style="{StaticResource Icon}" Width="10" Height="10" Data="M5,5 L19,19 M19,5 L5,19"/>
+                      </Button>
+                    </Grid>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+            </StackPanel>
+          </ScrollViewer>
+        </Grid>
+      </ContentControl>
+
+      <!-- ~~~~ Bottom: the shared Reader ~~~~ -->
+      <ContentControl Style="{StaticResource Panel}" VerticalAlignment="Bottom" Height="66" Margin="16,0,16,16" Padding="18,0">
+        <Grid VerticalAlignment="Center">
+          <StackPanel Orientation="Horizontal" Visibility="{Binding ui.readerVis}">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,14,0">
+              <Rectangle Width="5" Height="26" Margin="1.5,0" RadiusX="2" RadiusY="2" Fill="{Binding theme.accent}" RenderTransformOrigin="0.5,1"><Rectangle.RenderTransform><ScaleTransform x:Name="Eq1"/></Rectangle.RenderTransform></Rectangle>
+              <Rectangle Width="5" Height="26" Margin="1.5,0" RadiusX="2" RadiusY="2" Fill="{Binding theme.accent2}" RenderTransformOrigin="0.5,1"><Rectangle.RenderTransform><ScaleTransform x:Name="Eq2"/></Rectangle.RenderTransform></Rectangle>
+              <Rectangle Width="5" Height="26" Margin="1.5,0" RadiusX="2" RadiusY="2" Fill="{Binding theme.accent}" RenderTransformOrigin="0.5,1"><Rectangle.RenderTransform><ScaleTransform x:Name="Eq3"/></Rectangle.RenderTransform></Rectangle>
+              <Rectangle Width="5" Height="26" Margin="1.5,0" RadiusX="2" RadiusY="2" Fill="{Binding theme.accent2}" RenderTransformOrigin="0.5,1"><Rectangle.RenderTransform><ScaleTransform x:Name="Eq4"/></Rectangle.RenderTransform></Rectangle>
+              <Rectangle Width="5" Height="26" Margin="1.5,0" RadiusX="2" RadiusY="2" Fill="{Binding theme.accent}" RenderTransformOrigin="0.5,1"><Rectangle.RenderTransform><ScaleTransform x:Name="Eq5"/></Rectangle.RenderTransform></Rectangle>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center">
+              <TextBlock FontSize="16" FontWeight="Bold" Foreground="{Binding theme.text}">
+                <Run Text="The Reader is reading "/><Run Text="{Binding ui.readerRef}" Foreground="{Binding theme.accent}"/>
+              </TextBlock>
+              <TextBlock FontSize="12" Foreground="{Binding theme.subtext}">
+                <Run Text="{Binding ui.readerBy}"/><Run Text="   "/><Run Text="{Binding ui.readerQueue}"/>
+              </TextBlock>
+            </StackPanel>
+          </StackPanel>
+          <TextBlock Visibility="{Binding ui.idleVis}" VerticalAlignment="Center" FontSize="14.5" Foreground="{Binding theme.subtext}"
+                     Text="The Reader is ready. Tap a verse and press Read, or walk up to the Reader and ask about the Bible."/>
+          <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button Style="{StaticResource Pill}" Content="Follow along" Command="{Binding toggleFollow}" Tag="{Binding ui.followOn}"/>
+            <Button Style="{StaticResource Pill}" Command="{Binding stopReading}" Visibility="{Binding ui.readerVis}">
+              <StackPanel Orientation="Horizontal"><Rectangle Width="10" Height="10" RadiusX="2" RadiusY="2" Fill="{Binding theme.btnText}" Margin="0,0,8,0"/><TextBlock Text="Stop"/></StackPanel>
+            </Button>
+          </StackPanel>
+        </Grid>
+      </ContentControl>
+
+      <!-- toast -->
+      <Border VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,96,0,0" CornerRadius="17" Padding="18,8" Opacity="0" IsHitTestVisible="False"
+              Background="{Binding theme.panelSolid}" BorderBrush="{Binding theme.accent}" BorderThickness="1">
+        <Border.RenderTransform><TranslateTransform/></Border.RenderTransform>
+        <Border.Style>
+          <Style TargetType="Border">
+            <Style.Triggers>
+              <DataTrigger Binding="{Binding ui.toastFlip}" Value="True">
+                <DataTrigger.EnterActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                        <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/><LinearDoubleKeyFrame KeyTime="0:0:0.15" Value="1"/>
+                        <LinearDoubleKeyFrame KeyTime="0:0:2.4" Value="1"/><LinearDoubleKeyFrame KeyTime="0:0:2.9" Value="0"/>
+                      </DoubleAnimationUsingKeyFrames>
+                      <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="-12" To="0" Duration="0:0:0.3"/>
+                    </Storyboard>
+                  </BeginStoryboard>
+                </DataTrigger.EnterActions>
+                <DataTrigger.ExitActions>
+                  <BeginStoryboard>
+                    <Storyboard>
+                      <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
+                        <LinearDoubleKeyFrame KeyTime="0:0:0" Value="0"/><LinearDoubleKeyFrame KeyTime="0:0:0.15" Value="1"/>
+                        <LinearDoubleKeyFrame KeyTime="0:0:2.4" Value="1"/><LinearDoubleKeyFrame KeyTime="0:0:2.9" Value="0"/>
+                      </DoubleAnimationUsingKeyFrames>
+                      <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" From="-12" To="0" Duration="0:0:0.3"/>
+                    </Storyboard>
+                  </BeginStoryboard>
+                </DataTrigger.ExitActions>
+              </DataTrigger>
+            </Style.Triggers>
+          </Style>
+        </Border.Style>
+        <TextBlock Text="{Binding ui.toast}" FontSize="14" FontWeight="SemiBold" Foreground="{Binding theme.text}"/>
+      </Border>
+    </Grid>
+
+    <!-- ~~~~ 3. Neon glass glint (sweeps across everything) ~~~~ -->
+    <Rectangle IsHitTestVisible="False" Opacity="{Binding theme.glintOp}">
+      <Rectangle.RenderTransform><TranslateTransform x:Name="GlintT" X="-2000"/></Rectangle.RenderTransform>
+      <Rectangle.Fill>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0.35">
+          <GradientStop Color="#00FFFFFF" Offset="0.4"/>
+          <GradientStop Color="#16FFFFFF" Offset="0.48"/>
+          <GradientStop Color="#2EFFFFFF" Offset="0.5"/>
+          <GradientStop Color="#16FFFFFF" Offset="0.52"/>
+          <GradientStop Color="#00FFFFFF" Offset="0.6"/>
+        </LinearGradientBrush>
+      </Rectangle.Fill>
+    </Rectangle>
+
+    <!-- theme change bloom -->
+    <Ellipse Width="300" Height="300" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity="0" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5">
+      <Ellipse.RenderTransform><ScaleTransform ScaleX="0" ScaleY="0"/></Ellipse.RenderTransform>
+      <Ellipse.Fill>
+        <RadialGradientBrush>
+          <GradientStop Color="#00FFFFFF" Offset="0.5"/>
+          <GradientStop Color="{Binding theme.accent}" Offset="0.85"/>
+          <GradientStop Color="#00FFFFFF" Offset="1"/>
+        </RadialGradientBrush>
+      </Ellipse.Fill>
+      <Ellipse.Style>
+        <Style TargetType="Ellipse">
+          <Style.Triggers>
+            <DataTrigger Binding="{Binding ui.themeFlip}" Value="True">
+              <DataTrigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.7" To="0" Duration="0:0:1"/>
+                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" From="0.2" To="9" Duration="0:0:1"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" From="0.2" To="9" Duration="0:0:1"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+                  </Storyboard>
+                </BeginStoryboard>
+              </DataTrigger.EnterActions>
+              <DataTrigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.7" To="0" Duration="0:0:1"/>
+                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)" From="0.2" To="9" Duration="0:0:1"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+                    <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)" From="0.2" To="9" Duration="0:0:1"><DoubleAnimation.EasingFunction><CubicEase EasingMode="EaseOut"/></DoubleAnimation.EasingFunction></DoubleAnimation>
+                  </Storyboard>
+                </BeginStoryboard>
+              </DataTrigger.ExitActions>
+            </DataTrigger>
+          </Style.Triggers>
+        </Style>
+      </Ellipse.Style>
+    </Ellipse>
+  </Grid>
+</UserControl>
