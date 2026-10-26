@@ -5,6 +5,11 @@ and animated for import into the Meta Horizon Worlds desktop editor.
 
 ![Jellyfish swim cycle](previews/jellyfish_swim.gif)
 
+![Overview](previews/00-overview.png)
+
+> Previews are Blender renders of the **exported, re-imported** FBX files with an unlit alpha-blend
+> material like Horizon's. Lighting and blending in Horizon will differ a little.
+
 ## What's in the box
 
 ```
