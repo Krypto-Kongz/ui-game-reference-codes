@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "lib": ["ES2020"],
+    "types": [],
+    "strict": true,
+    "noEmitOnError": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "runtime",
+    "paths": {
+      "*": ["*", "crypto/*"],
+      "horizon/core": ["../types/horizon-core.d.ts"]
+    },
+    "rootDir": ".",
+    "outDir": "test/out",
+    "declaration": false,
+    "sourceMap": false
+  },
+  "include": ["runtime/**/*.ts", "examples/ArenaExample.ts"]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "horizon-asset-guard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Licensing, anti-copy and traceability kit for games sold between Meta Horizon Worlds creators: per-world license binding with pure TypeScript RSA verify and ChaCha20 over number[] (no typed arrays, no BigInt), per-buyer watermarked encrypted data modules, and a Node seller CLI (keygen, build, issue, trace, revoke, doctor).",
+  "type": "module",
+  "scripts": {
+    "lint:runtime": "node test/lint-runtime.mjs && node test/lint-runtime.mjs examples",
+    "build:test": "tsc -p tsconfig.test.json && node test/fix-esm-imports.mjs",
+    "test": "npm run lint:runtime && npm run build:test && npm run test:crypto && npm run test:chacha && npm run test:core && npm run test:assetguard && npm run test:cli && npm run test:e2e",
+    "test:crypto": "node test/crypto.test.mjs",
+    "test:chacha": "node test/chacha.test.mjs",
+    "test:core": "node test/core.test.mjs",
+    "test:assetguard": "node test/assetguard.test.mjs",
+    "test:cli": "node test/cli.test.mjs",
+    "test:e2e": "node test/e2e.test.mjs",
+    "bench:quickjs": "npm run build:test && node test/quickjs.bench.mjs",
+    "doctor": "node cli/hag.mjs doctor",
+    "build:sample": "node examples/make-build-sample.mjs"
+  },
+  "devDependencies": {
+    "quickjs-emscripten": "^0.31.0",
+    "typescript": "4.7.4"
+  }
+}

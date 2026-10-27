@@ -1,0 +1,10 @@
+{
+  "spawnRate": 1.0,
+  "waveDelayMs": 4000,
+  "respawnDelay": 2.0,
+  "critChance": 0.15,
+  "lootDropChance": 0.25,
+  "bossIntroDelay": 3.0,
+  "scorePerKill": 10,
+  "scorePerWave": 100
+}

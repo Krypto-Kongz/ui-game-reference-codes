@@ -1,0 +1,7 @@
+node_modules/
+package-lock.json
+test/out/
+# seller state and leak evidence: never commit keys, the ledger or trace reports
+.hag/
+trace-report.md
+report-*.md

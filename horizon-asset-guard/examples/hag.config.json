@@ -1,0 +1,14 @@
+{
+  "sku": "demo",
+  "seller": "Demo Seller",
+  "data": {
+    "waves": "data/waves.json",
+    "tunables": "data/tunables.json"
+  },
+  "marks": {
+    "tunables.respawnDelay": [1.9, 2.1],
+    "tunables.critChance": [0.14, 0.16],
+    "tunables.lootDropChance": [0.24, 0.26],
+    "tunables.bossIntroDelay": [2.8, 3.2]
+  }
+}

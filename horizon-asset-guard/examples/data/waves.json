@@ -1,0 +1,10 @@
+[
+  { "name": "Scouts", "enemies": 4, "intervalMs": 1800, "enemyHp": 20, "speed": 1.0, "boss": false },
+  { "name": "Raiders", "enemies": 6, "intervalMs": 1500, "enemyHp": 30, "speed": 1.05, "boss": false },
+  { "name": "Shieldwall", "enemies": 8, "intervalMs": 1400, "enemyHp": 45, "speed": 0.95, "boss": false },
+  { "name": "Skirmishers", "enemies": 10, "intervalMs": 1100, "enemyHp": 35, "speed": 1.25, "boss": false },
+  { "name": "Siege", "enemies": 12, "intervalMs": 1000, "enemyHp": 60, "speed": 0.9, "boss": false },
+  { "name": "Night Hunt", "enemies": 14, "intervalMs": 900, "enemyHp": 55, "speed": 1.35, "boss": false },
+  { "name": "Last Stand", "enemies": 18, "intervalMs": 750, "enemyHp": 70, "speed": 1.2, "boss": false },
+  { "name": "The Warden", "enemies": 1, "intervalMs": 0, "enemyHp": 900, "speed": 0.8, "boss": true }
+]

@@ -1,0 +1,4 @@
+[
+  { "name": "Scouts", "enemies": 4, "intervalMs": 1800, "enemyHp": 20, "speed": 1.0, "boss": false },
+  { "name": "Raiders", "enemies": 6, "intervalMs": 1500, "enemyHp": 30, "speed": 1.05, "boss": false }
+]
