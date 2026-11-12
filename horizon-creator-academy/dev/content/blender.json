@@ -1,0 +1,693 @@
+{
+  "section": "blender",
+  "label": "Blender",
+  "blurb": "Model game-ready 3D props in Blender and export them clean for Meta Horizon Worlds.",
+  "lessons": [
+    {
+      "id": "blender-01",
+      "title": "The Blender Window",
+      "subtitle": "Where everything lives on screen",
+      "level": "Start",
+      "minutes": 3,
+      "steps": [
+        "The big center area is the 3D Viewport. Your model lives here.",
+        "Top right is the Outliner: a list of every object in the scene.",
+        "Bottom right is Properties: settings for the selected object.",
+        "The bar along the bottom is the Timeline for animation.",
+        "Press T for the left tool shelf, N for the right side panel."
+      ],
+      "tip": "Pro tip: Workspace tabs at the very top (Layout, Modeling, UV) rearrange the screen for you.",
+      "keywords": ["window", "viewport", "outliner", "properties", "layout"],
+      "diagram": {
+        "type": "app_window",
+        "spec": {
+          "app": "blender",
+          "title": "Default Layout",
+          "regions": [
+            {"x": 0.0, "y": 0.0, "w": 0.7, "h": 0.82, "label": "3D Viewport", "n": 1},
+            {"x": 0.7, "y": 0.0, "w": 0.3, "h": 0.4, "label": "Outliner", "n": 2},
+            {"x": 0.7, "y": 0.4, "w": 0.3, "h": 0.42, "label": "Properties", "n": 3},
+            {"x": 0.0, "y": 0.82, "w": 1.0, "h": 0.18, "label": "Timeline", "n": 4}
+          ],
+          "callouts": [
+            {"n": 1, "text": "Your 3D scene"},
+            {"n": 2, "text": "List of objects"},
+            {"n": 3, "text": "Object settings"},
+            {"n": 4, "text": "Animation track"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which editor lists every object in your scene?",
+        "choices": ["Outliner", "Timeline", "Properties"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-02",
+      "title": "Moving Around The Viewport",
+      "subtitle": "Orbit, pan, zoom and snap views",
+      "level": "Start",
+      "minutes": 3,
+      "steps": [
+        "Hold the middle mouse button and drag to orbit around your model.",
+        "Hold Shift and the middle mouse button to pan, or slide the view.",
+        "Scroll the wheel to zoom in and out. Ctrl and drag also zooms.",
+        "Numpad 1 is front, 3 is right side, 7 is top. Ctrl flips to the back.",
+        "Numpad 5 switches between perspective and flat ortho view.",
+        "No numpad? Turn on Emulate Numpad in Preferences, Input."
+      ],
+      "tip": "Pro tip: Press Numpad . (period) to zoom straight to whatever you have selected.",
+      "keywords": ["viewport", "orbit", "pan", "zoom", "numpad", "navigation"],
+      "diagram": {
+        "type": "shortcuts",
+        "spec": {
+          "app": "blender",
+          "title": "Viewport Keys",
+          "keys": [
+            {"key": "MMB", "does": "Orbit the view"},
+            {"key": "Sh+MMB", "does": "Pan the view"},
+            {"key": "Scroll", "does": "Zoom in and out"},
+            {"key": "Num 1", "does": "Front view"},
+            {"key": "Num 3", "does": "Right view"},
+            {"key": "Num 7", "does": "Top view"},
+            {"key": "Num 5", "does": "Ortho or persp"},
+            {"key": "Num .", "does": "Frame selected"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which numpad key shows the front view?",
+        "choices": ["1", "7", "3"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-03",
+      "title": "Move, Rotate And Scale",
+      "subtitle": "The three transform tools",
+      "level": "Start",
+      "minutes": 3,
+      "steps": [
+        "Left-click an object to select it. It gets a highlighted outline.",
+        "Press G to grab and move. Move the mouse, then click to drop it.",
+        "Press R to rotate. Press S to scale bigger or smaller.",
+        "After G, R or S, tap X, Y or Z to lock to one axis.",
+        "Type a number to be exact, like G Z 2 to move up 2 meters.",
+        "Press Esc or right-click to cancel a move partway through."
+      ],
+      "tip": "Pro tip: The colored arrows and rings (the gizmo) do the same jobs with the mouse.",
+      "keywords": ["move", "rotate", "scale", "transform", "grab", "gizmo"],
+      "diagram": {
+        "type": "toolbar",
+        "spec": {
+          "app": "blender",
+          "title": "Transform Tools",
+          "orient": "vertical",
+          "tools": [
+            {"icon": "select", "label": "Select"},
+            {"icon": "move", "label": "Move (G)"},
+            {"icon": "rotate", "label": "Rotate (R)"},
+            {"icon": "scale", "label": "Scale (S)"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which key grabs and moves an object?",
+        "choices": ["G", "R", "S"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-04",
+      "title": "The 3D Cursor And Pivot",
+      "subtitle": "Where new objects appear",
+      "level": "Start",
+      "minutes": 3,
+      "steps": [
+        "The 3D cursor is the red-white ring. New objects are born at it.",
+        "Shift and right-click places the 3D cursor where you point.",
+        "Press Shift C to send the cursor back to the world center.",
+        "The pivot point is what rotate and scale turn around.",
+        "Press the period key to pick a pivot, like Median or 3D Cursor."
+      ],
+      "tip": "Pro tip: Shift S opens the Snap menu to jump the cursor or object to exact spots.",
+      "keywords": ["cursor", "pivot", "origin", "snap", "median"],
+      "diagram": {
+        "type": "callout_art",
+        "spec": {
+          "app": "blender",
+          "title": "The 3D Cursor",
+          "subject": "gizmo",
+          "arrows": [
+            {"to": "center", "text": "3D cursor: spawn point"},
+            {"to": "ring", "text": "Shift RMB to place it"},
+            {"to": "axis", "text": "Pivot sets turn center"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Where do newly added objects appear?",
+        "choices": ["At the 3D cursor", "At the world center", "At the camera"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-05",
+      "title": "Adding Objects",
+      "subtitle": "The Add menu and mesh shapes",
+      "level": "Start",
+      "minutes": 2,
+      "steps": [
+        "Press Shift A, or click the Add menu in the top bar.",
+        "Open Mesh to see starter shapes: Cube, Sphere, Cylinder, Plane.",
+        "Click a shape. It drops into the scene at the 3D cursor.",
+        "A small panel opens at the bottom left. Click it to set size or cuts.",
+        "That panel only works right after adding. It closes once you do more."
+      ],
+      "tip": "Pro tip: Press F9 to reopen the last add panel if you clicked away too soon.",
+      "keywords": ["add", "mesh", "cube", "sphere", "primitive"],
+      "diagram": {
+        "type": "steps_flow",
+        "spec": {
+          "app": "blender",
+          "title": "Add A Mesh",
+          "steps": [
+            {"icon": "cube", "label": "Press Shift A"},
+            {"icon": "shape", "label": "Open Mesh"},
+            {"icon": "sphere", "label": "Pick a shape"},
+            {"icon": "scale", "label": "Set size"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What shortcut opens the Add menu?",
+        "choices": ["Shift A", "Shift C", "Tab"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-06",
+      "title": "Edit Mode And Object Mode",
+      "subtitle": "Tab toggles between the two",
+      "level": "Start",
+      "minutes": 3,
+      "steps": [
+        "Object Mode moves, rotates and scales a whole object at once.",
+        "Edit Mode changes the shape by moving its points and faces.",
+        "Press Tab to switch between the two modes.",
+        "In Edit Mode press 1 for vertices, 2 for edges, 3 for faces.",
+        "Vertices are points, edges are lines, faces are flat surfaces."
+      ],
+      "tip": "Pro tip: Drop back to Object Mode before you move or export the whole object.",
+      "keywords": ["edit mode", "object mode", "tab", "vertex", "edge", "face"],
+      "diagram": {
+        "type": "compare",
+        "spec": {
+          "app": "blender",
+          "title": "Two Modes",
+          "left": {"label": "Object Mode", "caption": "Whole object", "kind": "neutral", "motif": "shapes"},
+          "right": {"label": "Edit Mode", "caption": "Points and faces", "kind": "neutral", "motif": "mesh"}
+        }
+      },
+      "quiz": {
+        "q": "Which key switches between Object and Edit Mode?",
+        "choices": ["Tab", "G", "A"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-07",
+      "title": "Essential Edit Tools",
+      "subtitle": "Extrude, inset, loop cut and more",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "In Edit Mode, press E to extrude: pull new geometry out of a face.",
+        "Press I to inset: make a smaller face inside the one you have.",
+        "Press Ctrl R to add a loop cut: a new ring of edges around the mesh.",
+        "Press Ctrl B to bevel an edge into a rounded or chamfered corner.",
+        "Press K for the knife to cut your own custom lines across faces."
+      ],
+      "tip": "Pro tip: While loop cutting, scroll the wheel to add more than one cut at a time.",
+      "keywords": ["extrude", "inset", "loop cut", "bevel", "knife", "edit"],
+      "diagram": {
+        "type": "toolbar",
+        "spec": {
+          "app": "blender",
+          "title": "Edit Mode Tools",
+          "orient": "vertical",
+          "tools": [
+            {"icon": "extrude", "label": "Extrude (E)"},
+            {"icon": "face", "label": "Inset (I)"},
+            {"icon": "loopcut", "label": "Loop Cut"},
+            {"icon": "bevel", "label": "Bevel"},
+            {"icon": "knife", "label": "Knife (K)"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which shortcut adds a loop cut?",
+        "choices": ["Ctrl R", "Ctrl B", "E"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-08",
+      "title": "Modifiers That Save Time",
+      "subtitle": "Mirror, subdivide and solidify",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "Modifiers change your mesh without touching the real points.",
+        "Find them under the wrench icon in the Properties editor.",
+        "Mirror builds the other half for you. Model once, get both sides.",
+        "Subdivision Surface smooths a blocky mesh into soft curves.",
+        "Solidify gives a flat surface real thickness, like a wall or a cup.",
+        "Apply a modifier to bake it in before you export to Horizon."
+      ],
+      "tip": "Pro tip: Keep modifiers until the end. They stay editable so you can change your mind.",
+      "keywords": ["modifier", "mirror", "subdivision", "solidify", "wrench"],
+      "diagram": {
+        "type": "diagram_map",
+        "spec": {
+          "app": "blender",
+          "title": "Handy Modifiers",
+          "center": "Modifiers",
+          "nodes": [
+            {"icon": "mirror", "label": "Mirror"},
+            {"icon": "subdivide", "label": "Subdivision"},
+            {"icon": "cube", "label": "Solidify"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which modifier builds the second half of a symmetric model?",
+        "choices": ["Mirror", "Solidify", "Subdivision Surface"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-09",
+      "title": "Materials Basics",
+      "subtitle": "Color, metallic and roughness",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "A material gives a surface color and shine. Use the Principled BSDF.",
+        "Base Color is the plain color of the surface.",
+        "Metallic near 0 is plastic or wood. Near 1 is bare metal.",
+        "Roughness near 0 is shiny and mirror-like. Near 1 is matte and dull.",
+        "Horizon has no normal maps, so bake bumps into the Base Color."
+      ],
+      "tip": "Pro tip: Horizon reads base color, metallic and roughness. Paint fine detail into the color.",
+      "keywords": ["material", "base color", "metallic", "roughness", "shader", "normal"],
+      "diagram": {
+        "type": "callout_art",
+        "spec": {
+          "app": "blender",
+          "title": "A Material",
+          "subject": "sphere_mesh",
+          "arrows": [
+            {"to": "surface", "text": "Base Color: the hue"},
+            {"to": "highlight", "text": "Roughness: shiny or matte"},
+            {"to": "edge", "text": "Metallic: metal or not"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "A roughness value near 0 makes a surface look how?",
+        "choices": ["Shiny and reflective", "Matte and dull", "Transparent"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-10",
+      "title": "UV Unwrapping",
+      "subtitle": "Flatten a mesh for textures",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "A UV map flattens your 3D surface so a 2D image can wrap onto it.",
+        "In Edit Mode, select the edges where the mesh should split open.",
+        "Press Ctrl E and choose Mark Seam. Seams act like scissor cuts.",
+        "Select everything with A, then press U and choose Unwrap.",
+        "Open the UV Editor to see the flat pieces laid out on the texture."
+      ],
+      "tip": "Pro tip: Good seams hide in corners and creases so the texture has no ugly stretch.",
+      "keywords": ["uv", "unwrap", "seam", "texture", "mark seam"],
+      "diagram": {
+        "type": "steps_flow",
+        "spec": {
+          "app": "blender",
+          "title": "Unwrap A Mesh",
+          "steps": [
+            {"icon": "edge", "label": "Select edges"},
+            {"icon": "knife", "label": "Mark Seam"},
+            {"icon": "uv", "label": "Press U, Unwrap"},
+            {"icon": "image", "label": "Check UV Editor"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What does marking a seam do before unwrapping?",
+        "choices": ["Tells Blender where to cut open", "Deletes the edge", "Adds color"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-11",
+      "title": "Bake Detail Into Color",
+      "subtitle": "Fake bumps with no normal map",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "Horizon has no normal maps, so painted-in shading must do the work.",
+        "Baking copies light, shadow and bumps onto a flat color image.",
+        "Make a new image, select it in the material, and bake in Cycles.",
+        "Bake ambient occlusion or detail, then combine it into Base Color.",
+        "Now a simple low-poly mesh looks like it has carved detail."
+      ],
+      "tip": "Pro tip: Bake soft shadows into the color map to fake depth Horizon cannot show otherwise.",
+      "keywords": ["bake", "texture", "normal map", "occlusion", "color"],
+      "diagram": {
+        "type": "compare",
+        "spec": {
+          "app": "blender",
+          "title": "Faking Detail",
+          "left": {"label": "Heavy Mesh", "caption": "Too many faces", "kind": "bad", "motif": "mesh"},
+          "right": {"label": "Baked Color", "caption": "Detail in texture", "kind": "good", "motif": "pixels"}
+        }
+      },
+      "quiz": {
+        "q": "Why bake detail into the Base Color for Horizon?",
+        "choices": ["Horizon does not use normal maps", "It makes files bigger", "It adds more faces"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-12",
+      "title": "Apply Scale And Rotation",
+      "subtitle": "Reset to clean values for export",
+      "level": "Build",
+      "minutes": 3,
+      "steps": [
+        "Blender works in meters. Build your model at real-world size.",
+        "After scaling in Object Mode, the Scale value is no longer 1.0.",
+        "Odd scale breaks modifiers, physics and the Horizon export.",
+        "Press Ctrl A and choose Scale, or All Transforms, to reset to 1.0.",
+        "Check the N panel: Scale should read 1.0 on X, Y and Z before export."
+      ],
+      "tip": "Pro tip: Apply Rotation too so your object points the way Horizon expects when placed.",
+      "keywords": ["apply", "scale", "rotation", "meters", "ctrl a", "transform"],
+      "diagram": {
+        "type": "shortcuts",
+        "spec": {
+          "app": "blender",
+          "title": "Apply Transforms",
+          "keys": [
+            {"key": "Ctrl A", "does": "Open Apply menu"},
+            {"key": "R", "does": "Rotate object"},
+            {"key": "S", "does": "Scale object"},
+            {"key": "N", "does": "See transforms"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What should Scale read after you apply it?",
+        "choices": ["1.0", "0.0", "100"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-13",
+      "title": "The N Panel",
+      "subtitle": "Exact location, rotation and size",
+      "level": "Build",
+      "minutes": 3,
+      "steps": [
+        "Press N in the viewport to open the side panel on the right.",
+        "The Item tab shows Location, Rotation, Scale and Dimensions.",
+        "Type exact numbers here instead of dragging with the mouse.",
+        "Dimensions show real size in meters, handy for matching props.",
+        "Press N again to hide the panel and free up screen space."
+      ],
+      "tip": "Pro tip: Set Dimensions directly to size a door or table to the exact meters you need.",
+      "keywords": ["n panel", "transform", "location", "dimensions", "item"],
+      "diagram": {
+        "type": "app_window",
+        "spec": {
+          "app": "blender",
+          "title": "The N Panel",
+          "regions": [
+            {"x": 0.0, "y": 0.0, "w": 0.75, "h": 1.0, "label": "3D Viewport", "n": 1},
+            {"x": 0.75, "y": 0.0, "w": 0.25, "h": 0.6, "label": "N Panel: Item", "n": 2}
+          ],
+          "callouts": [
+            {"n": 1, "text": "Your model"},
+            {"n": 2, "text": "Exact numbers here"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which key opens the N side panel?",
+        "choices": ["N", "T", "G"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-14",
+      "title": "Parenting And Collections",
+      "subtitle": "Keep a big scene organized",
+      "level": "Build",
+      "minutes": 3,
+      "steps": [
+        "Parenting links objects so the child follows the parent when it moves.",
+        "Select the child first, then shift-click the parent, then press Ctrl P.",
+        "Collections are folders in the Outliner that group related objects.",
+        "Press M to move selected objects into a collection.",
+        "Good names and groups make a big build easy to find and select."
+      ],
+      "tip": "Pro tip: Parent small parts to a main body so the whole thing moves as one in Horizon.",
+      "keywords": ["parent", "child", "collection", "outliner", "organize"],
+      "diagram": {
+        "type": "diagram_map",
+        "spec": {
+          "app": "blender",
+          "title": "Scene Order",
+          "center": "Scene",
+          "nodes": [
+            {"icon": "link", "label": "Parenting"},
+            {"icon": "group", "label": "Collections"},
+            {"icon": "layers", "label": "Outliner"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which key parents the selected objects?",
+        "choices": ["Ctrl P", "Ctrl M", "Tab"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-15",
+      "title": "Bones And Weight Paint",
+      "subtitle": "Rig a simple model to bend",
+      "level": "Build",
+      "minutes": 5,
+      "steps": [
+        "An armature is a skeleton of bones that make a mesh bend and pose.",
+        "Add one with Shift A, Armature. Extrude bones with E in Edit Mode.",
+        "Select the mesh, then the armature, and press Ctrl P.",
+        "Choose With Automatic Weights so bones grab the nearby surface.",
+        "Weight Paint mode shows red for strong pull and blue for none.",
+        "Fix spots where a bone bends the wrong part of the mesh."
+      ],
+      "tip": "Pro tip: Keep rigs simple. A few clean bones animate and export far better than many.",
+      "keywords": ["armature", "bone", "rig", "weight paint", "skeleton"],
+      "diagram": {
+        "type": "callout_art",
+        "spec": {
+          "app": "blender",
+          "title": "A Simple Rig",
+          "subject": "bone_rig",
+          "arrows": [
+            {"to": "bone", "text": "Bone: moves the mesh"},
+            {"to": "joint", "text": "Joint: a bend point"},
+            {"to": "mesh", "text": "Weights: how much pull"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What does Weight Paint control?",
+        "choices": ["How strongly a bone moves a part", "The object color", "The light"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-16",
+      "title": "Keyframe Animation",
+      "subtitle": "Make an object move over time",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "A keyframe stores a pose at one moment on the timeline.",
+        "Go to frame 1, pose the object, then press I to insert a key.",
+        "Jump ahead to a later frame, move the object, and press I again.",
+        "Blender fills the frames between so the motion plays smoothly.",
+        "Press Spacebar to play the animation and watch it loop."
+      ],
+      "tip": "Pro tip: For Horizon, keep a clean looping action so the motion repeats with no jump.",
+      "keywords": ["keyframe", "animation", "timeline", "insert", "loop"],
+      "diagram": {
+        "type": "steps_flow",
+        "spec": {
+          "app": "blender",
+          "title": "Animate It",
+          "steps": [
+            {"icon": "anim", "label": "Go to a frame"},
+            {"icon": "move", "label": "Pose, press I"},
+            {"icon": "redo", "label": "Jump ahead, key"},
+            {"icon": "play", "label": "Play and loop"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which key inserts a keyframe?",
+        "choices": ["I", "K", "P"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-17",
+      "title": "Keep Triangle Counts Low",
+      "subtitle": "Fast models run well in Horizon",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "Every face is split into triangles when Horizon draws your model.",
+        "Fewer triangles mean smoother performance for everyone in the world.",
+        "Turn on Statistics in the overlays to see triangle and vert counts.",
+        "The Decimate modifier cuts triangle count on a finished mesh.",
+        "Keep each single mesh under 65,535 vertices or it will not import."
+      ],
+      "tip": "Pro tip: Hold detail in the texture, not the mesh. A flat wall needs only two triangles.",
+      "keywords": ["triangles", "poly count", "decimate", "vertices", "performance"],
+      "diagram": {
+        "type": "compare",
+        "spec": {
+          "app": "blender",
+          "title": "Poly Count",
+          "left": {"label": "High Poly", "caption": "Slow and heavy", "kind": "bad", "motif": "mesh"},
+          "right": {"label": "Low Poly", "caption": "Fast and light", "kind": "good", "motif": "mesh"}
+        }
+      },
+      "quiz": {
+        "q": "What is the vertex limit for one mesh in Horizon?",
+        "choices": ["65,535", "399,000", "1,024"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-18",
+      "title": "Export FBX For Horizon",
+      "subtitle": "Send your model out the right way",
+      "level": "Pro",
+      "minutes": 5,
+      "steps": [
+        "Select your finished object in Object Mode first.",
+        "Choose File, Export, FBX. Horizon reads the FBX format.",
+        "Turn on Selected Objects so only your model is exported.",
+        "Set the scale so the FBX comes out in meters, matching Horizon.",
+        "Apply scale and rotation before exporting to avoid odd sizing.",
+        "Save textures as PNG, power of two, 1024 pixels at most."
+      ],
+      "tip": "Pro tip: Keep a tidy folder. Horizon wants the FBX plus its PNG textures together.",
+      "keywords": ["export", "fbx", "meters", "png", "horizon"],
+      "diagram": {
+        "type": "steps_flow",
+        "spec": {
+          "app": "blender",
+          "title": "Export To Horizon",
+          "steps": [
+            {"icon": "cube", "label": "Select model"},
+            {"icon": "align", "label": "Apply transforms"},
+            {"icon": "export", "label": "Export FBX"},
+            {"icon": "image", "label": "PNG textures"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What file format does Horizon import from Blender?",
+        "choices": ["FBX", "OBJ", "BLEND"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-19",
+      "title": "Horizon Naming Rules",
+      "subtitle": "Name materials so Horizon reads them",
+      "level": "Pro",
+      "minutes": 5,
+      "steps": [
+        "Horizon finds surfaces by material name, so naming must be exact.",
+        "Name materials with numerals like 1, 2, 3, one per surface type.",
+        "Add a suffix for the shader: _Unlit, _Blend, _Transparent, _Masked.",
+        "A glowing sign uses _Unlit. A see-through pane uses _Transparent.",
+        "Textures must be PNG, a power of two, and 1024 pixels at most.",
+        "No normal maps. Bake any bump or shadow detail into the color map."
+      ],
+      "tip": "Pro tip: Match each texture file name to its material so Horizon pairs them on import.",
+      "keywords": ["material", "naming", "unlit", "transparent", "png", "suffix"],
+      "diagram": {
+        "type": "diagram_map",
+        "spec": {
+          "app": "blender",
+          "title": "Material Names",
+          "center": "Material 1",
+          "nodes": [
+            {"icon": "light", "label": "_Unlit glow"},
+            {"icon": "eye", "label": "_Transparent"},
+            {"icon": "layers", "label": "_Blend"},
+            {"icon": "mask", "label": "_Masked"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which suffix marks a glowing, unlit material?",
+        "choices": ["_Unlit", "_Masked", "_Blend"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "blender-20",
+      "title": "Common Import Mistakes",
+      "subtitle": "Fix these before you upload",
+      "level": "Pro",
+      "minutes": 5,
+      "steps": [
+        "Wrong scale: the model shows up giant or tiny. Apply scale in meters.",
+        "Too many tris: keep a whole model under 399,000 triangles.",
+        "A mesh over 65,535 vertices is rejected. Split or decimate it.",
+        "Bad material names break surfaces. Use numerals plus the right suffix.",
+        "Wrong textures: use PNG, power of two, up to 1024, and no normal maps."
+      ],
+      "tip": "Pro tip: Run scale, tris, names and textures as a checklist every single export.",
+      "keywords": ["import", "mistakes", "scale", "tris", "materials", "textures"],
+      "diagram": {
+        "type": "compare",
+        "spec": {
+          "app": "blender",
+          "title": "Right vs Wrong",
+          "left": {"label": "Common Errors", "caption": "Giant, heavy, mislabeled", "kind": "bad", "motif": "none"},
+          "right": {"label": "Clean Export", "caption": "Meters, light, named", "kind": "good", "motif": "none"}
+        }
+      },
+      "quiz": {
+        "q": "What is the triangle limit for a whole Horizon model?",
+        "choices": ["399,000", "65,535", "1,024"],
+        "answer": 0
+      }
+    }
+  ]
+}

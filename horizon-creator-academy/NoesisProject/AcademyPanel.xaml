@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="#FFEAEEF6">
+  <Viewbox Stretch="Uniform">
+    <Canvas Width="1480" Height="840">
+      <Canvas.Resources>
+        <Style x:Key="KeyBtn" TargetType="Button">
+          <Setter Property="Foreground" Value="#FF1F293C"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+          <Setter Property="FontSize" Value="20"/>
+          <Setter Property="Cursor" Value="Hand"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="#FFFFFFFF" CornerRadius="12" BorderBrush="#FFDBE1EC" BorderThickness="1">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#FFEFF2FB"/>
+                  </Trigger>
+                  <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="bd" Property="BorderBrush" Value="#FF3B4BE0"/>
+                    <Setter TargetName="bd" Property="BorderThickness" Value="2"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+        <Style x:Key="PillBtn" TargetType="Button">
+          <Setter Property="Foreground" Value="#FFFFFFFF"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+          <Setter Property="FontSize" Value="20"/>
+          <Setter Property="Cursor" Value="Hand"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="#FF3B4BE0" CornerRadius="12" BorderBrush="#FFDBE1EC" BorderThickness="1">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#FF4B5BF0"/>
+                  </Trigger>
+                  <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="bd" Property="BorderBrush" Value="#FF3B4BE0"/>
+                    <Setter TargetName="bd" Property="BorderThickness" Value="2"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+        <Style x:Key="GhostBtn" TargetType="Button">
+          <Setter Property="Foreground" Value="#FF1F293C"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+          <Setter Property="FontSize" Value="20"/>
+          <Setter Property="Cursor" Value="Hand"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="#00000000" CornerRadius="12" BorderBrush="#FFDBE1EC" BorderThickness="1">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#FFEFF2FB"/>
+                  </Trigger>
+                  <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="bd" Property="BorderBrush" Value="#FF3B4BE0"/>
+                    <Setter TargetName="bd" Property="BorderThickness" Value="2"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+        <Style x:Key="AnsBtn" TargetType="Button">
+          <Setter Property="Foreground" Value="#FF1F293C"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+          <Setter Property="FontSize" Value="20"/>
+          <Setter Property="Cursor" Value="Hand"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="#FFFFFFFF" CornerRadius="12" BorderBrush="#FFDBE1EC" BorderThickness="1">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#FFEFF2FB"/>
+                  </Trigger>
+                  <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="bd" Property="BorderBrush" Value="#FF3B4BE0"/>
+                    <Setter TargetName="bd" Property="BorderThickness" Value="2"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+        <Style x:Key="CardBtn" TargetType="Button">
+          <Setter Property="Foreground" Value="#FF1F293C"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+          <Setter Property="FontSize" Value="20"/>
+          <Setter Property="Cursor" Value="Hand"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="#FFFFFFFF" CornerRadius="12" BorderBrush="#FFDBE1EC" BorderThickness="1">
+                  <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#FFF7F9FE"/>
+                  </Trigger>
+                  <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="bd" Property="BorderBrush" Value="#FF3B4BE0"/>
+                    <Setter TargetName="bd" Property="BorderThickness" Value="2"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+        <Style x:Key="Nav0" TargetType="Button">
+          <Setter Property="Foreground" Value="#FFFFFFFF"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+          <Setter Property="FontSize" Value="21"/>
+          <Setter Property="HorizontalContentAlignment" Value="Left"/>
+          <Setter Property="Cursor" Value="Hand"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="#00000000" CornerRadius="12" Padding="14,0,0,0">
+                  <Grid>
+                    <Border Width="6" Height="30" CornerRadius="3" HorizontalAlignment="Left" Background="#FFE87D0D"/>
+                    <ContentPresenter Margin="22,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                  </Grid>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#22FFFFFF"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+        <Style x:Key="Nav1" TargetType="Button">
+          <Setter Property="Foreground" Value="#FFFFFFFF"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+          <Setter Property="FontSize" Value="21"/>
+          <Setter Property="HorizontalContentAlignment" Value="Left"/>
+          <Setter Property="Cursor" Value="Hand"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="#00000000" CornerRadius="12" Padding="14,0,0,0">
+                  <Grid>
+                    <Border Width="6" Height="30" CornerRadius="3" HorizontalAlignment="Left" Background="#FF31A8FF"/>
+                    <ContentPresenter Margin="22,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                  </Grid>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#22FFFFFF"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+        <Style x:Key="Nav2" TargetType="Button">
+          <Setter Property="Foreground" Value="#FFFFFFFF"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+          <Setter Property="FontSize" Value="21"/>
+          <Setter Property="HorizontalContentAlignment" Value="Left"/>
+          <Setter Property="Cursor" Value="Hand"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="#00000000" CornerRadius="12" Padding="14,0,0,0">
+                  <Grid>
+                    <Border Width="6" Height="30" CornerRadius="3" HorizontalAlignment="Left" Background="#FF7D2AE8"/>
+                    <ContentPresenter Margin="22,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                  </Grid>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#22FFFFFF"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+        <Style x:Key="Nav3" TargetType="Button">
+          <Setter Property="Foreground" Value="#FFFFFFFF"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+          <Setter Property="FontSize" Value="21"/>
+          <Setter Property="HorizontalContentAlignment" Value="Left"/>
+          <Setter Property="Cursor" Value="Hand"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="#00000000" CornerRadius="12" Padding="14,0,0,0">
+                  <Grid>
+                    <Border Width="6" Height="30" CornerRadius="3" HorizontalAlignment="Left" Background="#FF0A84FF"/>
+                    <ContentPresenter Margin="22,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                  </Grid>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#22FFFFFF"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+        <Style x:Key="NavN" TargetType="Button">
+          <Setter Property="Foreground" Value="#FFFFFFFF"/>
+          <Setter Property="FontWeight" Value="Bold"/>
+          <Setter Property="FontSize" Value="21"/>
+          <Setter Property="HorizontalContentAlignment" Value="Left"/>
+          <Setter Property="Cursor" Value="Hand"/>
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="Button">
+                <Border x:Name="bd" Background="#00000000" CornerRadius="12" Padding="14,0,0,0">
+                  <Grid>
+                    <Border Width="6" Height="30" CornerRadius="3" HorizontalAlignment="Left" Background="#FF9AA6C4"/>
+                    <ContentPresenter Margin="22,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                  </Grid>
+                </Border>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="bd" Property="Background" Value="#22FFFFFF"/>
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Style>
+      </Canvas.Resources>
+<Border Canvas.Left="0" Canvas.Top="0" Width="210" Height="840" Background="#FF151B2E" CornerRadius="0"/>
+<TextBlock Canvas.Left="26" Canvas.Top="34" Text="CREATOR" FontSize="26" Foreground="#FFFFFFFF" FontWeight="Bold"/>
+<TextBlock Canvas.Left="26" Canvas.Top="66" Text="ACADEMY" FontSize="26" Foreground="#FF3B4BE0" FontWeight="Bold"/>
+<Border Canvas.Left="26" Canvas.Top="104" Width="158" Height="2" Background="#33FFFFFF" CornerRadius="0"/>
+<TextBlock Canvas.Left="30" Canvas.Top="120" Text="LEARN" FontSize="16" Foreground="#FF9AA6C4" FontWeight="Bold"/>
+<Button Canvas.Left="14" Canvas.Top="146" Width="182" Height="50" Style="{StaticResource Nav0}" Command="{Binding navSec0}" Content="Blender"/>
+<Button Canvas.Left="14" Canvas.Top="202" Width="182" Height="50" Style="{StaticResource Nav1}" Command="{Binding navSec1}" Content="Photoshop"/>
+<Button Canvas.Left="14" Canvas.Top="258" Width="182" Height="50" Style="{StaticResource Nav2}" Command="{Binding navSec2}" Content="Canva"/>
+<Button Canvas.Left="14" Canvas.Top="314" Width="182" Height="50" Style="{StaticResource Nav3}" Command="{Binding navSec3}" Content="Horizon"/>
+<TextBlock Canvas.Left="30" Canvas.Top="380" Text="TOOLS" FontSize="16" Foreground="#FF9AA6C4" FontWeight="Bold"/>
+<Button Canvas.Left="14" Canvas.Top="406" Width="182" Height="46" Style="{StaticResource NavN}" Command="{Binding navHome}" Content="Home"/>
+<Button Canvas.Left="14" Canvas.Top="458" Width="182" Height="46" Style="{StaticResource NavN}" Command="{Binding navSearch}" Content="Search"/>
+<Button Canvas.Left="14" Canvas.Top="510" Width="182" Height="46" Style="{StaticResource NavN}" Command="{Binding navBookmarks}" Content="Bookmarks"/>
+<Border Canvas.Left="14" Canvas.Top="780" Width="182" Height="40" Background="#33FF4D4D" CornerRadius="10">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding errShow}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+<TextBlock Canvas.Left="0" Canvas.Top="0" Text="{Binding err}" FontSize="16" Foreground="#FFFFFFFF" FontWeight="Bold" Width="182" TextWrapping="Wrap" TextAlignment="Center"/>
+</Border>
+<Canvas Canvas.Left="230" Canvas.Top="0" Width="1250" Height="840">
+  <Canvas.RenderTransform><TranslateTransform x:Name="pageT" Y="0"/></Canvas.RenderTransform>
+  <Canvas.Style>
+    <Style TargetType="Canvas">
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding pulse}" Value="0">
+          <DataTrigger.EnterActions><BeginStoryboard><Storyboard>
+            <DoubleAnimation Storyboard.TargetName="pageT" Storyboard.TargetProperty="Y" From="14" To="0" Duration="0:0:0.22"/>
+          </Storyboard></BeginStoryboard></DataTrigger.EnterActions>
+        </DataTrigger>
+        <DataTrigger Binding="{Binding pulse}" Value="1">
+          <DataTrigger.EnterActions><BeginStoryboard><Storyboard>
+            <DoubleAnimation Storyboard.TargetName="pageT" Storyboard.TargetProperty="Y" From="14" To="0" Duration="0:0:0.22"/>
+          </Storyboard></BeginStoryboard></DataTrigger.EnterActions>
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+  </Canvas.Style>
+<Border Canvas.Left="0" Canvas.Top="0" Width="1250" Height="840" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding view}" Value="home"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+  <Canvas>
+<TextBlock Canvas.Left="40" Canvas.Top="48" Text="Learn to Create" FontSize="46" Foreground="#FF1F293C" FontWeight="Bold"/>
+<TextBlock Canvas.Left="40" Canvas.Top="112" Text="Tap a tool on the left, or a card below. Big, simple lessons with a picture on every page." FontSize="22" Foreground="#FF687791" FontWeight="Normal" Width="900" TextWrapping="Wrap"/>
+  <Button Canvas.Left="40" Canvas.Top="190" Width="470" Height="240" Style="{StaticResource CardBtn}" Command="{Binding navSec0}">
+    <Grid Width="470" Height="240">
+      <Border Width="470" Height="10" VerticalAlignment="Top" CornerRadius="12,12,0,0" Background="#FFE87D0D"/>
+      <TextBlock Margin="28,36,0,0" Text="Blender" FontSize="34" FontWeight="Bold" Foreground="#FF1F293C"/>
+      <TextBlock Margin="28,92,28,0" Text="{Binding h0Blurb}" FontSize="21" FontWeight="Normal" Foreground="#FF687791" TextWrapping="Wrap" Width="414"/>
+      <TextBlock Margin="28,0,0,24" VerticalAlignment="Bottom" Text="{Binding h0Count}" FontSize="19" FontWeight="Bold" Foreground="#FFE87D0D"/>
+    </Grid>
+  </Button>
+  <Button Canvas.Left="535" Canvas.Top="190" Width="470" Height="240" Style="{StaticResource CardBtn}" Command="{Binding navSec1}">
+    <Grid Width="470" Height="240">
+      <Border Width="470" Height="10" VerticalAlignment="Top" CornerRadius="12,12,0,0" Background="#FF31A8FF"/>
+      <TextBlock Margin="28,36,0,0" Text="Photoshop" FontSize="34" FontWeight="Bold" Foreground="#FF1F293C"/>
+      <TextBlock Margin="28,92,28,0" Text="{Binding h1Blurb}" FontSize="21" FontWeight="Normal" Foreground="#FF687791" TextWrapping="Wrap" Width="414"/>
+      <TextBlock Margin="28,0,0,24" VerticalAlignment="Bottom" Text="{Binding h1Count}" FontSize="19" FontWeight="Bold" Foreground="#FF31A8FF"/>
+    </Grid>
+  </Button>
+  <Button Canvas.Left="40" Canvas.Top="460" Width="470" Height="240" Style="{StaticResource CardBtn}" Command="{Binding navSec2}">
+    <Grid Width="470" Height="240">
+      <Border Width="470" Height="10" VerticalAlignment="Top" CornerRadius="12,12,0,0" Background="#FF7D2AE8"/>
+      <TextBlock Margin="28,36,0,0" Text="Canva" FontSize="34" FontWeight="Bold" Foreground="#FF1F293C"/>
+      <TextBlock Margin="28,92,28,0" Text="{Binding h2Blurb}" FontSize="21" FontWeight="Normal" Foreground="#FF687791" TextWrapping="Wrap" Width="414"/>
+      <TextBlock Margin="28,0,0,24" VerticalAlignment="Bottom" Text="{Binding h2Count}" FontSize="19" FontWeight="Bold" Foreground="#FF7D2AE8"/>
+    </Grid>
+  </Button>
+  <Button Canvas.Left="535" Canvas.Top="460" Width="470" Height="240" Style="{StaticResource CardBtn}" Command="{Binding navSec3}">
+    <Grid Width="470" Height="240">
+      <Border Width="470" Height="10" VerticalAlignment="Top" CornerRadius="12,12,0,0" Background="#FF0A84FF"/>
+      <TextBlock Margin="28,36,0,0" Text="Horizon" FontSize="34" FontWeight="Bold" Foreground="#FF1F293C"/>
+      <TextBlock Margin="28,92,28,0" Text="{Binding h3Blurb}" FontSize="21" FontWeight="Normal" Foreground="#FF687791" TextWrapping="Wrap" Width="414"/>
+      <TextBlock Margin="28,0,0,24" VerticalAlignment="Bottom" Text="{Binding h3Count}" FontSize="19" FontWeight="Bold" Foreground="#FF0A84FF"/>
+    </Grid>
+  </Button>
+  </Canvas>
+</Border>
+<Border Canvas.Left="0" Canvas.Top="0" Width="1250" Height="840" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding view}" Value="lesson"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+  <Canvas>
+  <Border Canvas.Left="30" Canvas.Top="30" Width="660" Height="372" CornerRadius="16" Background="#FFFFFFFF" BorderBrush="#FFDBE1EC" BorderThickness="1">
+    <Image Source="{Binding lsImg}" Width="640" Height="360" Stretch="Uniform"/>
+  </Border>
+<TextBlock Canvas.Left="716" Canvas.Top="34" Text="{Binding lsCounter}" FontSize="18" Foreground="#FF687791" FontWeight="Bold"/>
+  <Border Canvas.Left="866" Canvas.Top="30" Width="92" Height="30" CornerRadius="15">
+    <Border.Style><Style TargetType="Border"><Setter Property="Background" Value="#FFF0A828"/><Style.Triggers>
+      <DataTrigger Binding="{Binding lsLevel}" Value="Start"><Setter Property="Background" Value="#FF2EB88A"/></DataTrigger>
+      <DataTrigger Binding="{Binding lsLevel}" Value="Pro"><Setter Property="Background" Value="#FFE24C5C"/></DataTrigger>
+    </Style.Triggers></Style></Border.Style>
+    <TextBlock Text="{Binding lsLevel}" FontSize="16" FontWeight="Bold" Foreground="#FFFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  </Border>
+<TextBlock Canvas.Left="716" Canvas.Top="70" Text="{Binding lsTitle}" FontSize="34" Foreground="#FF1F293C" FontWeight="Bold" Width="520" TextWrapping="Wrap"/>
+<TextBlock Canvas.Left="716" Canvas.Top="150" Text="{Binding lsSub}" FontSize="22" Foreground="#FF687791" FontWeight="Normal" Width="520" TextWrapping="Wrap"/>
+  <Border Canvas.Left="716" Canvas.Top="196" Width="520" Height="48" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding st0Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+    <Canvas>
+      <Border Width="30" Height="30" CornerRadius="15" Background="#FF3B4BE0"><TextBlock Text="{Binding st0N}" FontSize="16" FontWeight="Bold" Foreground="#FFFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+      <TextBlock Canvas.Left="42" Text="{Binding st0}" FontSize="19" FontWeight="Normal" Foreground="#FF1F293C" TextWrapping="Wrap" Width="474"/>
+    </Canvas>
+  </Border>
+  <Border Canvas.Left="716" Canvas.Top="248" Width="520" Height="48" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding st1Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+    <Canvas>
+      <Border Width="30" Height="30" CornerRadius="15" Background="#FF3B4BE0"><TextBlock Text="{Binding st1N}" FontSize="16" FontWeight="Bold" Foreground="#FFFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+      <TextBlock Canvas.Left="42" Text="{Binding st1}" FontSize="19" FontWeight="Normal" Foreground="#FF1F293C" TextWrapping="Wrap" Width="474"/>
+    </Canvas>
+  </Border>
+  <Border Canvas.Left="716" Canvas.Top="300" Width="520" Height="48" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding st2Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+    <Canvas>
+      <Border Width="30" Height="30" CornerRadius="15" Background="#FF3B4BE0"><TextBlock Text="{Binding st2N}" FontSize="16" FontWeight="Bold" Foreground="#FFFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+      <TextBlock Canvas.Left="42" Text="{Binding st2}" FontSize="19" FontWeight="Normal" Foreground="#FF1F293C" TextWrapping="Wrap" Width="474"/>
+    </Canvas>
+  </Border>
+  <Border Canvas.Left="716" Canvas.Top="352" Width="520" Height="48" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding st3Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+    <Canvas>
+      <Border Width="30" Height="30" CornerRadius="15" Background="#FF3B4BE0"><TextBlock Text="{Binding st3N}" FontSize="16" FontWeight="Bold" Foreground="#FFFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+      <TextBlock Canvas.Left="42" Text="{Binding st3}" FontSize="19" FontWeight="Normal" Foreground="#FF1F293C" TextWrapping="Wrap" Width="474"/>
+    </Canvas>
+  </Border>
+  <Border Canvas.Left="716" Canvas.Top="404" Width="520" Height="48" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding st4Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+    <Canvas>
+      <Border Width="30" Height="30" CornerRadius="15" Background="#FF3B4BE0"><TextBlock Text="{Binding st4N}" FontSize="16" FontWeight="Bold" Foreground="#FFFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+      <TextBlock Canvas.Left="42" Text="{Binding st4}" FontSize="19" FontWeight="Normal" Foreground="#FF1F293C" TextWrapping="Wrap" Width="474"/>
+    </Canvas>
+  </Border>
+  <Border Canvas.Left="716" Canvas.Top="456" Width="520" Height="48" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding st5Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+    <Canvas>
+      <Border Width="30" Height="30" CornerRadius="15" Background="#FF3B4BE0"><TextBlock Text="{Binding st5N}" FontSize="16" FontWeight="Bold" Foreground="#FFFFFFFF" HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+      <TextBlock Canvas.Left="42" Text="{Binding st5}" FontSize="19" FontWeight="Normal" Foreground="#FF1F293C" TextWrapping="Wrap" Width="474"/>
+    </Canvas>
+  </Border>
+  <Border Canvas.Left="30" Canvas.Top="424" Width="660" Height="54" CornerRadius="12" Background="#FFEFF2FB">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding lsTipShow}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+    <TextBlock Margin="18,0,18,0" Text="{Binding lsTip}" FontSize="18" FontWeight="Bold" Foreground="#FF3B4BE0" TextWrapping="Wrap" VerticalAlignment="Center"/>
+  </Border>
+<Border Canvas.Left="30" Canvas.Top="498" Width="560" Height="12" Background="#FFDBE1EC" CornerRadius="6"/>
+  <Border Canvas.Left="30" Canvas.Top="498" Height="12" CornerRadius="6" Background="#FF3B4BE0" Width="{Binding lsProgW}"/>
+<Button Canvas.Left="30" Canvas.Top="536" Width="150" Height="56" Style="{StaticResource AnsBtn}" Command="{Binding btnPrev}" Content="&lt; Back"/>
+<Button Canvas.Left="190" Canvas.Top="536" Width="150" Height="56" Style="{StaticResource AnsBtn}" Command="{Binding btnNext}" Content="Next &gt;"/>
+<Button Canvas.Left="350" Canvas.Top="536" Width="160" Height="56" Style="{StaticResource PillBtn}" Command="{Binding btnMark}" Content="{Binding lsMark}"/>
+<Button Canvas.Left="540" Canvas.Top="536" Width="150" Height="56" Style="{StaticResource PillBtn}" Command="{Binding btnQuiz}" Content="Quiz"/>
+  </Canvas>
+</Border>
+<Border Canvas.Left="0" Canvas.Top="0" Width="1250" Height="840" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding view}" Value="search"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+  <Canvas>
+<TextBlock Canvas.Left="30" Canvas.Top="34" Text="Search the Academy" FontSize="34" Foreground="#FF1F293C" FontWeight="Bold"/>
+<Border Canvas.Left="30" Canvas.Top="90" Width="660" Height="56" Background="#FFFFFFFF" CornerRadius="12" BorderBrush="#FFDBE1EC" BorderThickness="1"/>
+<TextBlock Canvas.Left="48" Canvas.Top="104" Text="{Binding sqQuery}" FontSize="26" Foreground="#FF1F293C" FontWeight="Bold" Width="600"/>
+  <TextBlock Canvas.Left="48" Canvas.Top="104" Text="Type a word..." FontSize="24" FontWeight="Normal" Foreground="#FF687791">
+<TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding srHint}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+  </TextBlock>
+<Button Canvas.Left="30" Canvas.Top="170" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyQ}" Content="Q"/>
+<Button Canvas.Left="92" Canvas.Top="170" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyW}" Content="W"/>
+<Button Canvas.Left="154" Canvas.Top="170" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyE}" Content="E"/>
+<Button Canvas.Left="216" Canvas.Top="170" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyR}" Content="R"/>
+<Button Canvas.Left="278" Canvas.Top="170" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyT}" Content="T"/>
+<Button Canvas.Left="340" Canvas.Top="170" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyY}" Content="Y"/>
+<Button Canvas.Left="402" Canvas.Top="170" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyU}" Content="U"/>
+<Button Canvas.Left="464" Canvas.Top="170" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyI}" Content="I"/>
+<Button Canvas.Left="526" Canvas.Top="170" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyO}" Content="O"/>
+<Button Canvas.Left="588" Canvas.Top="170" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyP}" Content="P"/>
+<Button Canvas.Left="52" Canvas.Top="234" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyA}" Content="A"/>
+<Button Canvas.Left="114" Canvas.Top="234" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyS}" Content="S"/>
+<Button Canvas.Left="176" Canvas.Top="234" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyD}" Content="D"/>
+<Button Canvas.Left="238" Canvas.Top="234" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyF}" Content="F"/>
+<Button Canvas.Left="300" Canvas.Top="234" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyG}" Content="G"/>
+<Button Canvas.Left="362" Canvas.Top="234" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyH}" Content="H"/>
+<Button Canvas.Left="424" Canvas.Top="234" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyJ}" Content="J"/>
+<Button Canvas.Left="486" Canvas.Top="234" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyK}" Content="K"/>
+<Button Canvas.Left="548" Canvas.Top="234" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyL}" Content="L"/>
+<Button Canvas.Left="74" Canvas.Top="298" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyZ}" Content="Z"/>
+<Button Canvas.Left="136" Canvas.Top="298" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyX}" Content="X"/>
+<Button Canvas.Left="198" Canvas.Top="298" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyC}" Content="C"/>
+<Button Canvas.Left="260" Canvas.Top="298" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyV}" Content="V"/>
+<Button Canvas.Left="322" Canvas.Top="298" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyB}" Content="B"/>
+<Button Canvas.Left="384" Canvas.Top="298" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyN}" Content="N"/>
+<Button Canvas.Left="446" Canvas.Top="298" Width="56" Height="56" Style="{StaticResource KeyBtn}" Command="{Binding keyM}" Content="M"/>
+<Button Canvas.Left="30" Canvas.Top="362" Width="150" Height="52" Style="{StaticResource KeyBtn}" Command="{Binding keySpace}" Content="Space"/>
+<Button Canvas.Left="190" Canvas.Top="362" Width="150" Height="52" Style="{StaticResource KeyBtn}" Command="{Binding keyBack}" Content="Delete"/>
+<Button Canvas.Left="350" Canvas.Top="362" Width="150" Height="52" Style="{StaticResource KeyBtn}" Command="{Binding keyClear}" Content="Clear"/>
+<TextBlock Canvas.Left="716" Canvas.Top="34" Text="Results" FontSize="24" Foreground="#FF687791" FontWeight="Bold"/>
+  <Button Canvas.Left="716" Canvas.Top="74" Width="524" Height="74" Command="{Binding openRes0}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding sr0Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="524" Height="74"><Canvas>
+      <TextBlock Canvas.Left="18" Canvas.Top="12" Text="{Binding sr0}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="486" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="18" Canvas.Top="42" Text="{Binding sr0Sub}" FontSize="17" FontWeight="Normal" Foreground="#FF687791" Width="380" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="404" Canvas.Top="42" Text="{Binding sr0Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF3B4BE0" Width="104" TextAlignment="Right"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="716" Canvas.Top="156" Width="524" Height="74" Command="{Binding openRes1}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding sr1Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="524" Height="74"><Canvas>
+      <TextBlock Canvas.Left="18" Canvas.Top="12" Text="{Binding sr1}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="486" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="18" Canvas.Top="42" Text="{Binding sr1Sub}" FontSize="17" FontWeight="Normal" Foreground="#FF687791" Width="380" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="404" Canvas.Top="42" Text="{Binding sr1Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF3B4BE0" Width="104" TextAlignment="Right"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="716" Canvas.Top="238" Width="524" Height="74" Command="{Binding openRes2}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding sr2Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="524" Height="74"><Canvas>
+      <TextBlock Canvas.Left="18" Canvas.Top="12" Text="{Binding sr2}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="486" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="18" Canvas.Top="42" Text="{Binding sr2Sub}" FontSize="17" FontWeight="Normal" Foreground="#FF687791" Width="380" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="404" Canvas.Top="42" Text="{Binding sr2Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF3B4BE0" Width="104" TextAlignment="Right"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="716" Canvas.Top="320" Width="524" Height="74" Command="{Binding openRes3}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding sr3Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="524" Height="74"><Canvas>
+      <TextBlock Canvas.Left="18" Canvas.Top="12" Text="{Binding sr3}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="486" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="18" Canvas.Top="42" Text="{Binding sr3Sub}" FontSize="17" FontWeight="Normal" Foreground="#FF687791" Width="380" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="404" Canvas.Top="42" Text="{Binding sr3Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF3B4BE0" Width="104" TextAlignment="Right"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="716" Canvas.Top="402" Width="524" Height="74" Command="{Binding openRes4}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding sr4Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="524" Height="74"><Canvas>
+      <TextBlock Canvas.Left="18" Canvas.Top="12" Text="{Binding sr4}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="486" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="18" Canvas.Top="42" Text="{Binding sr4Sub}" FontSize="17" FontWeight="Normal" Foreground="#FF687791" Width="380" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="404" Canvas.Top="42" Text="{Binding sr4Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF3B4BE0" Width="104" TextAlignment="Right"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="716" Canvas.Top="484" Width="524" Height="74" Command="{Binding openRes5}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding sr5Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="524" Height="74"><Canvas>
+      <TextBlock Canvas.Left="18" Canvas.Top="12" Text="{Binding sr5}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="486" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="18" Canvas.Top="42" Text="{Binding sr5Sub}" FontSize="17" FontWeight="Normal" Foreground="#FF687791" Width="380" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Canvas.Left="404" Canvas.Top="42" Text="{Binding sr5Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF3B4BE0" Width="104" TextAlignment="Right"/>
+    </Canvas></Grid>
+  </Button>
+  <TextBlock Canvas.Left="716" Canvas.Top="300" Text="No matches. Try another word." FontSize="20" FontWeight="Normal" Foreground="#FF687791">
+<TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding srEmpty}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+  </TextBlock>
+  </Canvas>
+</Border>
+<Border Canvas.Left="0" Canvas.Top="0" Width="1250" Height="840" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding view}" Value="bookmarks"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+  <Canvas>
+<TextBlock Canvas.Left="30" Canvas.Top="34" Text="Your Bookmarks" FontSize="34" Foreground="#FF1F293C" FontWeight="Bold"/>
+<TextBlock Canvas.Left="400" Canvas.Top="46" Text="{Binding bmCount}" FontSize="20" Foreground="#FF687791" FontWeight="Bold"/>
+  <Button Canvas.Left="30" Canvas.Top="96" Width="580" Height="130" Command="{Binding openBm0}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding bm0Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="580" Height="130"><Canvas>
+      <Border Canvas.Left="0" Canvas.Top="0" Width="8" Height="130" Background="#FF3B4BE0"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="24" Text="{Binding bm0}" FontSize="23" FontWeight="Bold" Foreground="#FF1F293C" Width="520" TextWrapping="Wrap"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="86" Text="{Binding bm0Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF0A84FF"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="640" Canvas.Top="96" Width="580" Height="130" Command="{Binding openBm1}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding bm1Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="580" Height="130"><Canvas>
+      <Border Canvas.Left="0" Canvas.Top="0" Width="8" Height="130" Background="#FF3B4BE0"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="24" Text="{Binding bm1}" FontSize="23" FontWeight="Bold" Foreground="#FF1F293C" Width="520" TextWrapping="Wrap"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="86" Text="{Binding bm1Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF0A84FF"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="30" Canvas.Top="246" Width="580" Height="130" Command="{Binding openBm2}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding bm2Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="580" Height="130"><Canvas>
+      <Border Canvas.Left="0" Canvas.Top="0" Width="8" Height="130" Background="#FF3B4BE0"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="24" Text="{Binding bm2}" FontSize="23" FontWeight="Bold" Foreground="#FF1F293C" Width="520" TextWrapping="Wrap"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="86" Text="{Binding bm2Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF0A84FF"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="640" Canvas.Top="246" Width="580" Height="130" Command="{Binding openBm3}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding bm3Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="580" Height="130"><Canvas>
+      <Border Canvas.Left="0" Canvas.Top="0" Width="8" Height="130" Background="#FF3B4BE0"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="24" Text="{Binding bm3}" FontSize="23" FontWeight="Bold" Foreground="#FF1F293C" Width="520" TextWrapping="Wrap"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="86" Text="{Binding bm3Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF0A84FF"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="30" Canvas.Top="396" Width="580" Height="130" Command="{Binding openBm4}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding bm4Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="580" Height="130"><Canvas>
+      <Border Canvas.Left="0" Canvas.Top="0" Width="8" Height="130" Background="#FF3B4BE0"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="24" Text="{Binding bm4}" FontSize="23" FontWeight="Bold" Foreground="#FF1F293C" Width="520" TextWrapping="Wrap"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="86" Text="{Binding bm4Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF0A84FF"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="640" Canvas.Top="396" Width="580" Height="130" Command="{Binding openBm5}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding bm5Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="580" Height="130"><Canvas>
+      <Border Canvas.Left="0" Canvas.Top="0" Width="8" Height="130" Background="#FF3B4BE0"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="24" Text="{Binding bm5}" FontSize="23" FontWeight="Bold" Foreground="#FF1F293C" Width="520" TextWrapping="Wrap"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="86" Text="{Binding bm5Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF0A84FF"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="30" Canvas.Top="546" Width="580" Height="130" Command="{Binding openBm6}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding bm6Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="580" Height="130"><Canvas>
+      <Border Canvas.Left="0" Canvas.Top="0" Width="8" Height="130" Background="#FF3B4BE0"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="24" Text="{Binding bm6}" FontSize="23" FontWeight="Bold" Foreground="#FF1F293C" Width="520" TextWrapping="Wrap"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="86" Text="{Binding bm6Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF0A84FF"/>
+    </Canvas></Grid>
+  </Button>
+  <Button Canvas.Left="640" Canvas.Top="546" Width="580" Height="130" Command="{Binding openBm7}">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource CardBtn}"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding bm7Show}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Button.Style>
+    <Grid Width="580" Height="130"><Canvas>
+      <Border Canvas.Left="0" Canvas.Top="0" Width="8" Height="130" Background="#FF3B4BE0"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="24" Text="{Binding bm7}" FontSize="23" FontWeight="Bold" Foreground="#FF1F293C" Width="520" TextWrapping="Wrap"/>
+      <TextBlock Canvas.Left="28" Canvas.Top="86" Text="{Binding bm7Tag}" FontSize="16" FontWeight="Bold" Foreground="#FF0A84FF"/>
+    </Canvas></Grid>
+  </Button>
+  <TextBlock Canvas.Left="30" Canvas.Top="300" Text="No bookmarks yet. Open a lesson and tap Save to keep it here." FontSize="22" FontWeight="Normal" Foreground="#FF687791" Width="900" TextWrapping="Wrap">
+<TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding bmEmpty}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+  </TextBlock>
+  </Canvas>
+</Border>
+<Border Canvas.Left="0" Canvas.Top="0" Width="1250" Height="840" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding view}" Value="quiz"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+  <Canvas>
+<TextBlock Canvas.Left="30" Canvas.Top="34" Text="Quiz" FontSize="34" Foreground="#FF1F293C" FontWeight="Bold"/>
+<TextBlock Canvas.Left="130" Canvas.Top="44" Text="{Binding qzNum}" FontSize="22" Foreground="#FF687791" FontWeight="Bold"/>
+<Border Canvas.Left="30" Canvas.Top="92" Width="720" Height="150" Background="#FFEFF2FB" CornerRadius="16"/>
+<TextBlock Canvas.Left="54" Canvas.Top="116" Text="{Binding qzQ}" FontSize="28" Foreground="#FF1F293C" FontWeight="Bold" Width="672" TextWrapping="Wrap"/>
+  <Button Canvas.Left="30" Canvas.Top="268" Width="720" Height="72" Command="{Binding ansA}" Content="{Binding qzA}" FontSize="24">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource AnsBtn}"><Setter Property="FontSize" Value="24"/>
+      <Style.Triggers><DataTrigger Binding="{Binding qzRightA}" Value="1">
+        <Setter Property="Foreground" Value="#FFFFFFFF"/></DataTrigger></Style.Triggers></Style></Button.Style>
+  </Button>
+  <Button Canvas.Left="30" Canvas.Top="352" Width="720" Height="72" Command="{Binding ansB}" Content="{Binding qzB}" FontSize="24">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource AnsBtn}"><Setter Property="FontSize" Value="24"/>
+      <Style.Triggers><DataTrigger Binding="{Binding qzRightB}" Value="1">
+        <Setter Property="Foreground" Value="#FFFFFFFF"/></DataTrigger></Style.Triggers></Style></Button.Style>
+  </Button>
+  <Button Canvas.Left="30" Canvas.Top="436" Width="720" Height="72" Command="{Binding ansC}" Content="{Binding qzC}" FontSize="24">
+    <Button.Style><Style TargetType="Button" BasedOn="{StaticResource AnsBtn}"><Setter Property="FontSize" Value="24"/>
+      <Style.Triggers><DataTrigger Binding="{Binding qzRightC}" Value="1">
+        <Setter Property="Foreground" Value="#FFFFFFFF"/></DataTrigger></Style.Triggers></Style></Button.Style>
+  </Button>
+  <Border Canvas.Left="30" Canvas.Top="268" Width="720" Height="72" CornerRadius="12" Background="#332EB88A" BorderBrush="#FF2EB88A" BorderThickness="3">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding qzRightA}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+    <TextBlock Text="Correct answer" FontSize="16" FontWeight="Bold" Foreground="#FF2EB88A" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,14,0"/>
+  </Border>
+  <Border Canvas.Left="30" Canvas.Top="352" Width="720" Height="72" CornerRadius="12" Background="#332EB88A" BorderBrush="#FF2EB88A" BorderThickness="3">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding qzRightB}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+    <TextBlock Text="Correct answer" FontSize="16" FontWeight="Bold" Foreground="#FF2EB88A" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,14,0"/>
+  </Border>
+  <Border Canvas.Left="30" Canvas.Top="436" Width="720" Height="72" CornerRadius="12" Background="#332EB88A" BorderBrush="#FF2EB88A" BorderThickness="3">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding qzRightC}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+    <TextBlock Text="Correct answer" FontSize="16" FontWeight="Bold" Foreground="#FF2EB88A" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,8,14,0"/>
+  </Border>
+<TextBlock Canvas.Left="30" Canvas.Top="536" Text="{Binding qzBanner}" FontSize="24" Foreground="#FF3B4BE0" FontWeight="Bold" Width="560" TextWrapping="Wrap"/>
+<Button Canvas.Left="600" Canvas.Top="528" Width="150" Height="56" Style="{StaticResource PillBtn}" Command="{Binding quizNext}" Content="Next"/>
+<Border Canvas.Left="780" Canvas.Top="92" Width="440" Height="492" Background="#FFFFFFFF" CornerRadius="16" BorderBrush="#FFDBE1EC" BorderThickness="1"/>
+<TextBlock Canvas.Left="804" Canvas.Top="112" Text="Scoreboard" FontSize="22" Foreground="#FF1F293C" FontWeight="Bold"/>
+  <TextBlock Canvas.Left="804" Canvas.Top="158" Text="{Binding ql0}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="402" TextTrimming="CharacterEllipsis"/>
+  <TextBlock Canvas.Left="804" Canvas.Top="204" Text="{Binding ql1}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="402" TextTrimming="CharacterEllipsis"/>
+  <TextBlock Canvas.Left="804" Canvas.Top="250" Text="{Binding ql2}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="402" TextTrimming="CharacterEllipsis"/>
+  <TextBlock Canvas.Left="804" Canvas.Top="296" Text="{Binding ql3}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="402" TextTrimming="CharacterEllipsis"/>
+  <TextBlock Canvas.Left="804" Canvas.Top="342" Text="{Binding ql4}" FontSize="21" FontWeight="Bold" Foreground="#FF1F293C" Width="402" TextTrimming="CharacterEllipsis"/>
+<Button Canvas.Left="804" Canvas.Top="520" Width="150" Height="46" Style="{StaticResource GhostBtn}" Command="{Binding quizClose}" Content="Quit"/>
+  </Canvas>
+</Border>
+<Border Canvas.Left="0" Canvas.Top="0" Width="1250" Height="840" Background="#00000000">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding view}" Value="result"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+  <Canvas>
+<TextBlock Canvas.Left="40" Canvas.Top="60" Text="Quiz Complete" FontSize="46" Foreground="#FF1F293C" FontWeight="Bold"/>
+<TextBlock Canvas.Left="40" Canvas.Top="126" Text="{Binding rsTitle}" FontSize="24" Foreground="#FF687791" FontWeight="Bold"/>
+<Border Canvas.Left="40" Canvas.Top="180" Width="700" Height="420" Background="#FFFFFFFF" CornerRadius="16" BorderBrush="#FFDBE1EC" BorderThickness="1"/>
+<TextBlock Canvas.Left="70" Canvas.Top="204" Text="Final Scores" FontSize="26" Foreground="#FF1F293C" FontWeight="Bold"/>
+  <TextBlock Canvas.Left="70" Canvas.Top="256" Text="{Binding rl0}" FontSize="26" FontWeight="Bold" Foreground="#FF1F293C" Width="640" TextTrimming="CharacterEllipsis"/>
+  <TextBlock Canvas.Left="70" Canvas.Top="314" Text="{Binding rl1}" FontSize="26" FontWeight="Bold" Foreground="#FF1F293C" Width="640" TextTrimming="CharacterEllipsis"/>
+  <TextBlock Canvas.Left="70" Canvas.Top="372" Text="{Binding rl2}" FontSize="26" FontWeight="Bold" Foreground="#FF1F293C" Width="640" TextTrimming="CharacterEllipsis"/>
+  <TextBlock Canvas.Left="70" Canvas.Top="430" Text="{Binding rl3}" FontSize="26" FontWeight="Bold" Foreground="#FF1F293C" Width="640" TextTrimming="CharacterEllipsis"/>
+  <TextBlock Canvas.Left="70" Canvas.Top="488" Text="{Binding rl4}" FontSize="26" FontWeight="Bold" Foreground="#FF1F293C" Width="640" TextTrimming="CharacterEllipsis"/>
+  <TextBlock Canvas.Left="70" Canvas.Top="300" Text="Scores save to the AcademyQuiz leaderboard." FontSize="20" FontWeight="Normal" Foreground="#FF687791" Width="600" TextWrapping="Wrap">
+<TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding rsEmpty}" Value="1"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+  </TextBlock>
+<Button Canvas.Left="40" Canvas.Top="624" Width="200" Height="60" Style="{StaticResource PillBtn}" Command="{Binding btnQuiz}" Content="Play Again"/>
+<Button Canvas.Left="252" Canvas.Top="624" Width="200" Height="60" Style="{StaticResource AnsBtn}" Command="{Binding navHome}" Content="Home"/>
+  </Canvas>
+</Border>
+</Canvas>
+<Border Canvas.Left="0" Canvas.Top="0" Width="1480" Height="840" Background="#FFEAEEF6">
+<Border.Style><Style TargetType="Border"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding ready}" Value="0"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></Border.Style>
+  <TextBlock Text="Connecting to Creator Academy..." FontSize="30" FontWeight="Bold" Foreground="#FF687791" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+</Border>
+    </Canvas>
+  </Viewbox>
+</Grid>

@@ -1,0 +1,4 @@
+out/
+node_modules/
+preview_html/
+__pycache__/

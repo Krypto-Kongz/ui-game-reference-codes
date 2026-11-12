@@ -1,0 +1,715 @@
+{
+  "section": "horizon",
+  "label": "Horizon",
+  "blurb": "Build, script, and publish VR worlds in Meta Horizon Worlds using the desktop editor, Horizon Studio.",
+  "lessons": [
+    {
+      "id": "horizon-01",
+      "title": "What Is Horizon Worlds?",
+      "subtitle": "Two ways to build: VR or desktop",
+      "level": "Start",
+      "minutes": 3,
+      "steps": [
+        "Horizon Worlds is Meta's platform for building and playing social VR spaces.",
+        "You can visit on a Quest headset, or on a phone and PC screen.",
+        "There are two ways to build: in VR, or on a PC with the desktop editor.",
+        "The in-VR creation tools were retired. Serious building now happens on PC.",
+        "The PC app, called Horizon Studio, is where this guide works."
+      ],
+      "tip": "Pro tip: You still test in VR, but you build, script, and publish from the desktop editor.",
+      "keywords": ["horizon", "worlds", "vr", "desktop", "build", "meta"],
+      "diagram": {
+        "type": "compare",
+        "spec": {
+          "app": "horizon",
+          "title": "Two Ways To Build",
+          "left": {"label": "In VR", "caption": "Creation tools retired", "kind": "neutral", "motif": "none"},
+          "right": {"label": "Desktop", "caption": "Build here now", "kind": "good", "motif": "grid"}
+        }
+      },
+      "quiz": {
+        "q": "Where does serious building happen now?",
+        "choices": ["On PC in Horizon Studio", "Only in VR", "On a phone"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-02",
+      "title": "Get Horizon Studio",
+      "subtitle": "Download and open the desktop editor",
+      "level": "Start",
+      "minutes": 2,
+      "steps": [
+        "Horizon Studio is a free flatscreen app for Windows PCs.",
+        "Download it from the Meta Horizon website or the Meta Quest app.",
+        "Install it, then log in with the same Meta account you play with.",
+        "Open the app to see your worlds and the Create button.",
+        "You do not need a headset on to build, only to test in true VR."
+      ],
+      "tip": "Pro tip: Horizon Studio is the 2025 name for what builders used to call the Desktop Editor.",
+      "keywords": ["download", "install", "studio", "desktop", "windows", "login"],
+      "diagram": {
+        "type": "steps_flow",
+        "spec": {
+          "app": "horizon",
+          "title": "Install And Open",
+          "steps": [
+            {"icon": "download", "label": "Download the app"},
+            {"icon": "link", "label": "Log in to Meta"},
+            {"icon": "grid", "label": "Open Horizon Studio"},
+            {"icon": "cube", "label": "Build in 3D"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Horizon Studio runs on which device?",
+        "choices": ["A Windows PC", "A Quest headset only", "A game console"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-03",
+      "title": "The Horizon Studio Layout",
+      "subtitle": "Viewport, Hierarchy, Properties, more",
+      "level": "Start",
+      "minutes": 4,
+      "steps": [
+        "The Viewport in the middle is your 3D world. You look and build here.",
+        "The Hierarchy lists every object in the scene, like a table of contents.",
+        "The Properties panel shows settings for whatever object you select.",
+        "The Asset Library holds shapes, models, sounds, and your uploads.",
+        "The Console prints messages and errors while you test."
+      ],
+      "tip": "Pro tip: Panels can be moved and resized. If one goes missing, reopen it from the top menu.",
+      "keywords": ["layout", "viewport", "hierarchy", "properties", "assets", "console"],
+      "diagram": {
+        "type": "app_window",
+        "spec": {
+          "app": "horizon",
+          "title": "Studio Default Layout",
+          "regions": [
+            {"x": 0.0, "y": 0.0, "w": 0.66, "h": 0.72, "label": "Viewport", "n": 1},
+            {"x": 0.66, "y": 0.0, "w": 0.34, "h": 0.4, "label": "Hierarchy", "n": 2},
+            {"x": 0.66, "y": 0.4, "w": 0.34, "h": 0.32, "label": "Properties", "n": 3},
+            {"x": 0.0, "y": 0.72, "w": 0.66, "h": 0.28, "label": "Asset Library", "n": 4},
+            {"x": 0.66, "y": 0.72, "w": 0.34, "h": 0.28, "label": "Console", "n": 5}
+          ],
+          "callouts": [
+            {"n": 1, "text": "Your 3D world"},
+            {"n": 2, "text": "List of objects"},
+            {"n": 3, "text": "Selected object settings"},
+            {"n": 4, "text": "Shapes, models, sounds"},
+            {"n": 5, "text": "Logs and errors"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which panel lists every object in your scene?",
+        "choices": ["The Hierarchy", "The Console", "The Viewport"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-04",
+      "title": "Moving Around the Editor",
+      "subtitle": "Desktop keys vs grabbing in VR",
+      "level": "Start",
+      "minutes": 3,
+      "steps": [
+        "On desktop, press W A S D to fly forward, back, and sideways.",
+        "Hold the right mouse button and drag to look around.",
+        "Click an object, then press F to focus the camera on it.",
+        "Scroll the mouse wheel to zoom the view in and out.",
+        "In VR you move differently: reach out, grab an object, and pull it.",
+        "To scale in VR, grab with both hands and move them apart or together."
+      ],
+      "tip": "Pro tip: Desktop is precise and fast for layout. VR is great for checking real scale and feel.",
+      "keywords": ["navigation", "wasd", "camera", "focus", "vr", "grab"],
+      "diagram": {
+        "type": "shortcuts",
+        "spec": {
+          "app": "horizon",
+          "title": "Desktop Movement Keys",
+          "keys": [
+            {"key": "L-Click", "does": "Select an object"},
+            {"key": "W A S D", "does": "Move through the scene"},
+            {"key": "R-Mouse", "does": "Hold and drag to look"},
+            {"key": "F", "does": "Focus on selection"},
+            {"key": "Scroll", "does": "Zoom the view"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "How do you look around on the desktop?",
+        "choices": ["Hold right mouse and drag", "Press the spacebar", "Shake the headset"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-05",
+      "title": "Create a New World",
+      "subtitle": "Start from an empty scene",
+      "level": "Start",
+      "minutes": 3,
+      "steps": [
+        "From the Studio home screen, click Create to start a new world.",
+        "Pick a template or choose an empty world to start from scratch.",
+        "An empty scene is just a floor, the sky, and a spawn point.",
+        "Give the world a clear name so you can find it again.",
+        "Open the world to load the scene into the editor."
+      ],
+      "tip": "Pro tip: Starting empty teaches you the most. Templates are handy once you know the basics.",
+      "keywords": ["create", "world", "template", "empty", "scene", "spawn"],
+      "diagram": {
+        "type": "steps_flow",
+        "spec": {
+          "app": "horizon",
+          "title": "Make A New World",
+          "steps": [
+            {"icon": "grid", "label": "New world"},
+            {"icon": "shape", "label": "Pick a template"},
+            {"icon": "text", "label": "Name it"},
+            {"icon": "play", "label": "Open the scene"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What is in a fresh empty world?",
+        "choices": ["A floor, sky, and spawn point", "A full city", "Nothing at all"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-06",
+      "title": "Add Objects and Shapes",
+      "subtitle": "Drop in cubes, spheres, and more",
+      "level": "Start",
+      "minutes": 3,
+      "steps": [
+        "Open the Asset Library to find build blocks and ready-made models.",
+        "Start with primitives: cube, sphere, cylinder, and flat shapes.",
+        "Drag an asset into the Viewport, or select it and click to place it.",
+        "Each object you add shows up as a new line in the Hierarchy.",
+        "Combine simple primitives to rough out walls, floors, and props."
+      ],
+      "tip": "Pro tip: Gray-box your world with plain cubes first. Add nice models once layout feels right.",
+      "keywords": ["primitives", "cube", "sphere", "objects", "place", "build"],
+      "diagram": {
+        "type": "toolbar",
+        "spec": {
+          "app": "horizon",
+          "title": "Primitive Shapes",
+          "orient": "horizontal",
+          "tools": [
+            {"icon": "cube", "label": "Cube"},
+            {"icon": "sphere", "label": "Sphere"},
+            {"icon": "cylinder", "label": "Cylinder"},
+            {"icon": "shape", "label": "Flat shape"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What is a primitive?",
+        "choices": ["A simple built-in shape", "A finished 3D model", "A kind of script"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-07",
+      "title": "Move, Rotate, Scale",
+      "subtitle": "The gizmo handles and grid snap",
+      "level": "Build",
+      "minutes": 3,
+      "steps": [
+        "Select an object to see its gizmo: a set of colored handles.",
+        "Drag the arrows to move it along one direction.",
+        "Drag the curved rings to rotate it.",
+        "Drag the small boxes to scale it bigger or smaller.",
+        "Turn on grid snapping so objects line up to even steps."
+      ],
+      "tip": "Pro tip: Snapping keeps walls flush and floors aligned. Toggle it off for loose placement.",
+      "keywords": ["gizmo", "move", "rotate", "scale", "snap", "grid"],
+      "diagram": {
+        "type": "callout_art",
+        "spec": {
+          "app": "horizon",
+          "title": "Parts Of The Gizmo",
+          "subject": "gizmo",
+          "arrows": [
+            {"to": "arrow", "text": "Arrows move it"},
+            {"to": "ring", "text": "Rings rotate it"},
+            {"to": "corner", "text": "Boxes scale it"},
+            {"to": "base", "text": "Grid snaps it"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What do the ring handles do?",
+        "choices": ["Rotate the object", "Delete the object", "Hide the object"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-08",
+      "title": "The Hierarchy Window",
+      "subtitle": "Parent, group, name, and lock",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "The Hierarchy is the list of every object, nested like folders.",
+        "Drag one object onto another to parent it. Children follow the parent.",
+        "Group related objects into a folder to keep the list tidy.",
+        "Double-click a name to rename it. Clear names save you time later.",
+        "Lock an object so you do not move it by accident while building."
+      ],
+      "tip": "Pro tip: Parent a lamp to a table, and moving the table carries the lamp along with it.",
+      "keywords": ["hierarchy", "parent", "folder", "rename", "lock", "group"],
+      "diagram": {
+        "type": "app_window",
+        "spec": {
+          "app": "horizon",
+          "title": "Inside The Hierarchy",
+          "regions": [
+            {"x": 0.0, "y": 0.0, "w": 0.7, "h": 0.18, "label": "World (root)", "n": 1},
+            {"x": 0.06, "y": 0.2, "w": 0.64, "h": 0.18, "label": "Group folder", "n": 2},
+            {"x": 0.12, "y": 0.42, "w": 0.58, "h": 0.18, "label": "Chair (child)", "n": 3},
+            {"x": 0.12, "y": 0.64, "w": 0.58, "h": 0.18, "label": "Lamp (child)", "n": 4},
+            {"x": 0.74, "y": 0.0, "w": 0.26, "h": 0.82, "label": "Lock + Eye", "n": 5}
+          ],
+          "callouts": [
+            {"n": 1, "text": "Top of the tree"},
+            {"n": 2, "text": "Folder keeps it tidy"},
+            {"n": 3, "text": "Child follows parent"},
+            {"n": 4, "text": "Rename for clarity"},
+            {"n": 5, "text": "Lock or hide a row"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What happens when you parent object A to B?",
+        "choices": ["A follows B when B moves", "A gets deleted", "B turns invisible"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-09",
+      "title": "The Properties Panel",
+      "subtitle": "Transform, color, and collision",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "Select an object and the Properties panel fills with its settings.",
+        "Transform sets position, rotation, and scale as exact numbers.",
+        "Material and color change how the surface looks.",
+        "Visibility can hide an object from players while you keep it in the scene.",
+        "Collision decides if players and objects can pass through it or not."
+      ],
+      "tip": "Pro tip: Type exact transform numbers for precise placement that dragging cannot match.",
+      "keywords": ["properties", "transform", "material", "color", "visibility", "collision"],
+      "diagram": {
+        "type": "diagram_map",
+        "spec": {
+          "app": "horizon",
+          "title": "What Properties Control",
+          "center": "Properties",
+          "nodes": [
+            {"icon": "move", "label": "Transform"},
+            {"icon": "layers", "label": "Material"},
+            {"icon": "color", "label": "Color"},
+            {"icon": "eye", "label": "Visibility"},
+            {"icon": "box", "label": "Collision"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What does turning off collision do?",
+        "choices": ["Lets players pass through it", "Deletes the object", "Changes its color"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-10",
+      "title": "The Asset Library",
+      "subtitle": "Built-in assets and your uploads",
+      "level": "Build",
+      "minutes": 3,
+      "steps": [
+        "The Asset Library is your shelf of shapes, models, sounds, and effects.",
+        "Built-in assets come free with Horizon and are ready to drag in.",
+        "Your Uploads holds custom models and textures you brought in.",
+        "Use the search box to find an asset by name fast.",
+        "Every asset has a numeric Asset ID. Scripts use that ID to spawn it."
+      ],
+      "tip": "Pro tip: Note an asset's ID when you plan to spawn it from a script later, like a sound.",
+      "keywords": ["assets", "library", "search", "uploads", "asset id", "spawn"],
+      "diagram": {
+        "type": "app_window",
+        "spec": {
+          "app": "horizon",
+          "title": "The Asset Library",
+          "regions": [
+            {"x": 0.0, "y": 0.0, "w": 1.0, "h": 0.16, "label": "Search bar", "n": 1},
+            {"x": 0.0, "y": 0.16, "w": 0.25, "h": 0.84, "label": "Built-in", "n": 2},
+            {"x": 0.25, "y": 0.16, "w": 0.25, "h": 0.84, "label": "My Uploads", "n": 3},
+            {"x": 0.5, "y": 0.16, "w": 0.5, "h": 0.6, "label": "Asset grid", "n": 4},
+            {"x": 0.5, "y": 0.76, "w": 0.5, "h": 0.24, "label": "Asset ID", "n": 5}
+          ],
+          "callouts": [
+            {"n": 1, "text": "Find by name"},
+            {"n": 2, "text": "Free Horizon assets"},
+            {"n": 3, "text": "Your own uploads"},
+            {"n": 4, "text": "Drag one into the world"},
+            {"n": 5, "text": "The number scripts use"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What is an Asset ID?",
+        "choices": ["A number that names an asset", "A password", "A texture file"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-11",
+      "title": "Import a 3D Model",
+      "subtitle": "Upload FBX and PNG together",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "Model in Blender or another tool, then export the mesh as an FBX file.",
+        "Save your textures as PNG images next to the FBX.",
+        "In Horizon Studio, open Your Uploads and start a new import.",
+        "Upload the FBX and its PNG textures together so they link up.",
+        "Once processed, drag your model from the Asset Library into the world."
+      ],
+      "tip": "Pro tip: Keep the model light: fewer polygons and smaller textures load faster for players.",
+      "keywords": ["import", "fbx", "png", "texture", "upload", "model"],
+      "diagram": {
+        "type": "steps_flow",
+        "spec": {
+          "app": "horizon",
+          "title": "Import A Custom Model",
+          "steps": [
+            {"icon": "cube", "label": "Export FBX"},
+            {"icon": "image", "label": "PNG textures"},
+            {"icon": "upload", "label": "Upload together"},
+            {"icon": "grid", "label": "Place in world"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which files do you upload together for a model?",
+        "choices": ["FBX and its PNG textures", "Only a PDF", "A ZIP of scripts"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-12",
+      "title": "Gizmos You Use a Lot",
+      "subtitle": "Text, triggers, spawns, and more",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "A gizmo is a special object that adds behavior, not just a shape.",
+        "Text shows words in the world. Trigger Zone fires when a player enters.",
+        "Spawn Point sets where players appear when they arrive.",
+        "Door lets players move between areas. Particle adds effects like smoke.",
+        "Audio plays sound. Drag a gizmo in from the Asset Library like any asset."
+      ],
+      "tip": "Pro tip: Triggers are the start of most interactivity: enter a zone, and something happens.",
+      "keywords": ["gizmo", "trigger", "spawn", "door", "particle", "text"],
+      "diagram": {
+        "type": "toolbar",
+        "spec": {
+          "app": "horizon",
+          "title": "Handy Gizmos",
+          "orient": "vertical",
+          "tools": [
+            {"icon": "text", "label": "Text"},
+            {"icon": "box", "label": "Trigger Zone"},
+            {"icon": "shape", "label": "Spawn Point"},
+            {"icon": "link", "label": "Door"},
+            {"icon": "sound", "label": "Audio"},
+            {"icon": "light", "label": "Particle"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What does a Trigger Zone do?",
+        "choices": ["Fires when a player enters", "Plays music only", "Paints the floor"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-13",
+      "title": "Add Sound and Ambience",
+      "subtitle": "Spawn audio to fill your world",
+      "level": "Build",
+      "minutes": 3,
+      "steps": [
+        "Sound in Horizon plays through an Audio gizmo, driven by an audio asset.",
+        "Find or upload an audio asset and note its numeric Asset ID.",
+        "The common way is to spawn that asset as an AudioGizmo from a script.",
+        "Set it to loop for steady background ambience like wind or music.",
+        "Place point sounds near objects so they fade with distance."
+      ],
+      "tip": "Pro tip: Layer a soft looping ambience under short one-shot sounds for a world that feels alive.",
+      "keywords": ["sound", "audio", "ambience", "loop", "asset", "spawn"],
+      "diagram": {
+        "type": "steps_flow",
+        "spec": {
+          "app": "horizon",
+          "title": "Play A Sound",
+          "steps": [
+            {"icon": "sound", "label": "Find audio asset"},
+            {"icon": "text", "label": "Copy its Asset ID"},
+            {"icon": "node", "label": "Spawn AudioGizmo"},
+            {"icon": "play", "label": "Loop for ambience"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "How do you usually play a sound asset?",
+        "choices": ["Spawn it as an AudioGizmo", "Rename the object", "Delete its texture"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-14",
+      "title": "The Scripts Panel",
+      "subtitle": "Attach TypeScript and set modes",
+      "level": "Build",
+      "minutes": 5,
+      "steps": [
+        "Scripts add logic in TypeScript. You cannot edit scripts in VR, only on desktop.",
+        "Horizon uses strict TypeScript, CommonJS, ES2020, around version 4.7.",
+        "Create a script in the Scripts panel, then attach it to an object.",
+        "Server and game logic use Execution Mode Default on an empty object.",
+        "Local mode runs on one player's own device. Noesis UI panels run Shared."
+      ],
+      "tip": "Pro tip: Put core game rules in one Default script on an empty object, kept away from art.",
+      "keywords": ["scripts", "typescript", "execution", "default", "local", "shared"],
+      "diagram": {
+        "type": "diagram_map",
+        "spec": {
+          "app": "horizon",
+          "title": "Execution Modes",
+          "center": "Execution Mode",
+          "nodes": [
+            {"icon": "node", "label": "Default"},
+            {"icon": "hand", "label": "Local"},
+            {"icon": "link", "label": "Shared"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which mode runs server and game logic?",
+        "choices": ["Default", "Local", "Shared"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-15",
+      "title": "Saves and Leaderboards",
+      "subtitle": "Keep scores with persistent data",
+      "level": "Build",
+      "minutes": 4,
+      "steps": [
+        "To remember a player's progress, use Horizon persistent variables.",
+        "A persistent variable stores data per player that survives between visits.",
+        "Use a leaderboard to track and rank scores across players.",
+        "Read and write these from your scripts when a player earns points.",
+        "Do not build your own ranking board in a panel. Use the real leaderboard."
+      ],
+      "tip": "Pro tip: Persistent variables are for saves. Leaderboards are for scores. Never fake them in UI.",
+      "keywords": ["persistent", "variables", "leaderboard", "save", "score", "data"],
+      "diagram": {
+        "type": "compare",
+        "spec": {
+          "app": "horizon",
+          "title": "Saves Vs Scores",
+          "left": {"label": "Persistent Var", "caption": "Per-player saves", "kind": "good", "motif": "none"},
+          "right": {"label": "Leaderboard", "caption": "Ranked scores", "kind": "good", "motif": "none"}
+        }
+      },
+      "quiz": {
+        "q": "Where should scores be ranked?",
+        "choices": ["In a real leaderboard", "In a plain text panel", "In the Console"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-16",
+      "title": "Custom UI With Noesis",
+      "subtitle": "Panels for menus and buttons",
+      "level": "Build",
+      "minutes": 5,
+      "steps": [
+        "Noesis panels are custom screens: menus, buttons, scoreboards, and more.",
+        "First open Scripts, then Script Settings, then API, and enable horizon/ui.",
+        "Also enable horizon/noesis, or your panels will not connect at all.",
+        "Build the panel layout, then drive it with a script that runs Shared.",
+        "Buttons send events to your logic, and the panel updates what players see."
+      ],
+      "tip": "Pro tip: The enable-the-API step is the one everyone forgets. No API, no panel. Do it first.",
+      "keywords": ["noesis", "ui", "panel", "api", "horizon/ui", "shared"],
+      "diagram": {
+        "type": "callout_art",
+        "spec": {
+          "app": "horizon",
+          "title": "A Noesis Panel",
+          "subject": "panel_ui",
+          "arrows": [
+            {"to": "top", "text": "Enable horizon/ui first"},
+            {"to": "label", "text": "Text and labels"},
+            {"to": "button", "text": "Buttons react to taps"},
+            {"to": "image", "text": "Images and icons"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "What must you enable before a Noesis panel works?",
+        "choices": ["horizon/ui in Script Settings", "Collision", "Grid snap"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-17",
+      "title": "Test With Play Mode",
+      "subtitle": "Preview your world and read logs",
+      "level": "Build",
+      "minutes": 3,
+      "steps": [
+        "Press Play or Preview to drop into your world and try it as a player.",
+        "Walk around, press buttons, and check that triggers and sounds fire.",
+        "Watch the Console for errors and for messages your scripts print.",
+        "Stop play to return to editing with your changes still in place.",
+        "Test in a headset too, since VR scale and comfort can feel different."
+      ],
+      "tip": "Pro tip: Read the Console first when something breaks. The error names the script and line.",
+      "keywords": ["test", "play", "preview", "console", "errors", "debug"],
+      "diagram": {
+        "type": "app_window",
+        "spec": {
+          "app": "horizon",
+          "title": "Play And The Console",
+          "regions": [
+            {"x": 0.0, "y": 0.0, "w": 1.0, "h": 0.14, "label": "Play / Preview", "n": 1},
+            {"x": 0.0, "y": 0.14, "w": 1.0, "h": 0.56, "label": "Viewport (playing)", "n": 2},
+            {"x": 0.0, "y": 0.7, "w": 1.0, "h": 0.3, "label": "Console log", "n": 3}
+          ],
+          "callouts": [
+            {"n": 1, "text": "Enter and exit test"},
+            {"n": 2, "text": "Play as a visitor"},
+            {"n": 3, "text": "Errors show here"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Where do script errors show up?",
+        "choices": ["In the Console", "In the Hierarchy", "On the floor"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-18",
+      "title": "Keep Your World Light",
+      "subtitle": "Performance and the sim budget",
+      "level": "Pro",
+      "minutes": 4,
+      "steps": [
+        "Every object, script, and effect costs performance. Lighter worlds run smoother.",
+        "Use fewer objects and simpler meshes. Merge small props where you can.",
+        "Keep textures modest in size so they load fast on a headset.",
+        "Watch the simulation budget. Going over it causes lag and dropped frames.",
+        "Turn off collision and physics on objects that do not need them."
+      ],
+      "tip": "Pro tip: Build for the headset, not your PC. A Quest has far less power than a gaming rig.",
+      "keywords": ["performance", "budget", "optimize", "meshes", "textures", "lag"],
+      "diagram": {
+        "type": "diagram_map",
+        "spec": {
+          "app": "horizon",
+          "title": "Keep It Light",
+          "center": "Keep It Light",
+          "nodes": [
+            {"icon": "cube", "label": "Fewer objects"},
+            {"icon": "shape", "label": "Simple meshes"},
+            {"icon": "node", "label": "Fewer scripts"},
+            {"icon": "eye", "label": "Watch budget"},
+            {"icon": "group", "label": "Merge props"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Why keep a world light?",
+        "choices": ["It runs smoother on headsets", "It looks worse", "It hides objects"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-19",
+      "title": "Share and Protect a World",
+      "subtitle": "Editors, testers, and your work",
+      "level": "Pro",
+      "minutes": 4,
+      "steps": [
+        "Invite collaborators from the world's sharing settings.",
+        "An Editor can build, edit, and copy the whole world.",
+        "A Tester can only enter and play to give you feedback.",
+        "Only add trusted people as Editors, since they can copy everything.",
+        "A copy can be re-shared, so guard original art, scripts, and ideas."
+      ],
+      "tip": "Pro tip: Give feedback-only helpers the Tester role. Save the Editor role for build partners.",
+      "keywords": ["share", "collaborate", "editor", "tester", "copy", "protect"],
+      "diagram": {
+        "type": "compare",
+        "spec": {
+          "app": "horizon",
+          "title": "Editor Vs Tester",
+          "left": {"label": "Editor", "caption": "Build, edit, and COPY", "kind": "neutral", "motif": "none"},
+          "right": {"label": "Tester", "caption": "Play and give feedback", "kind": "good", "motif": "none"}
+        }
+      },
+      "quiz": {
+        "q": "Who can copy your whole world?",
+        "choices": ["An Editor", "A Tester", "A visitor"],
+        "answer": 0
+      }
+    },
+    {
+      "id": "horizon-20",
+      "title": "Publish Your World",
+      "subtitle": "Preview images and going live",
+      "level": "Pro",
+      "minutes": 4,
+      "steps": [
+        "Publishing makes your world public so anyone can find and play it.",
+        "Prepare three preview images at 2560x1440, 1440x1440, and 810x1440.",
+        "Each preview image must be under 4MB. Trim the file size if it is bigger.",
+        "Fill in world settings: name, description, and player limits.",
+        "Review everything, then publish. Update any time by publishing again."
+      ],
+      "tip": "Pro tip: Strong preview images sell your world in the feed. Treat them like a movie poster.",
+      "keywords": ["publish", "preview", "images", "settings", "release", "public"],
+      "diagram": {
+        "type": "steps_flow",
+        "spec": {
+          "app": "horizon",
+          "title": "Go Live",
+          "steps": [
+            {"icon": "image", "label": "3 preview images"},
+            {"icon": "crop", "label": "Size, under 4MB"},
+            {"icon": "align", "label": "World settings"},
+            {"icon": "upload", "label": "Publish world"}
+          ]
+        }
+      },
+      "quiz": {
+        "q": "Which preview image size is required?",
+        "choices": ["2560x1440", "1024x768", "500x500"],
+        "answer": 0
+      }
+    }
+  ]
+}
